@@ -1,11 +1,11 @@
-package br.com.mito.model;
+package model;
 
-public class usuario {
+public class Usuario {
     private int cpf;
     private String nome, prontuario, senha, email;
     private boolean isProfessor;
 
-    public usuario(int cpf, String nome, String prontuario, String senha, String email, boolean isProfessor) {
+    public Usuario(int cpf, String nome, String prontuario, String senha, String email, boolean isProfessor) {
         this.cpf = cpf;
         this.nome = nome;
         this.prontuario = prontuario;
@@ -13,6 +13,8 @@ public class usuario {
         this.email = email;
         this.isProfessor = isProfessor;
     }
+    
+    public Usuario() {}
 
     public int getCpf() {
         return cpf;
@@ -54,7 +56,7 @@ public class usuario {
         this.email = email;
     }
 
-    public boolean isIsProfessor() {
+    public boolean getIsProfessor() {
         return isProfessor;
     }
 

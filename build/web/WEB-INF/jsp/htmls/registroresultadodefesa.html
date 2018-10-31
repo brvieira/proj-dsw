@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+  
+  <link rel="stylesheet" href="estilo.css" type="text/css">
+  <title>Registro de Exame de Defesa</title>
+
+  
+</head><body>
+<h1 style="text-align: center;">Registro de Exame de Defesa<br>
+</h1>
+
+<br>
+
+<div class="caixaSelecao"><img class="fotoUsuarioPequena" alt="" src="imagens/fotoAluno.png">
+<div class="textoCaixaSelecao">Nome
+Completo do aluno</div>
+</div>
+
+Qual foi o resultado do seguinte exame de defesa?<br>
+
+<br>
+
+Data: <span style="font-weight: bold;">DD/MM/AAAA</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Horário: <span style="font-weight: bold;">HH:MM</span><br>
+
+Membros da banca:<br>
+
+&nbsp;&nbsp;&nbsp; Orientador: <span style="font-weight: bold;">Nome
+do orientador</span><br>
+
+&nbsp;&nbsp;&nbsp; Avaliador 1: <span style="font-weight: bold;">Nome
+do primeiro avaliador</span><br>
+
+&nbsp;&nbsp;&nbsp; Avaliador 2: <span style="font-weight: bold;">Nome
+do segundo avaliador<br>
+</span><br>
+
+<form action="/confirmarexamedefesacoordenador" method="post" name="confirmarexame">
+Resultado Final: <input name="resultado" value="Aprovado" type="radio">Aprovado&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <input name="resultado" value="Aprovado" type="radio">Aprovado com
+restrição&nbsp;&nbsp;&nbsp; <input name="resultado" value="Aprovado" type="radio">Reprovado<br>
+  <br>
+Parecer: <input name="parecer" value="MS" type="radio">Muito
+Satistafório&nbsp;&nbsp;&nbsp;&nbsp; <input name="parecer" value="MS" type="radio">Satistafório&nbsp;&nbsp;&nbsp;&nbsp; <input name="parecer" value="MS" type="radio">Regular &nbsp; &nbsp;&nbsp; <input name="parecer" value="MS" type="radio">Ruim<br>
+  <br>
+Considerações da banca:<br>
+  <textarea cols="60" rows="5" name="consideracoes"></textarea><br>
+  <br>
+  <input name="Confirmar" value="Confirmar" type="submit"><input value="Cancelar" name="Cancelar" type="button"></form>
+
+</body></html>

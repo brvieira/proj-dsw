@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Agendar Exame de Qualificação</title>
+
+  
+  
+  <link rel="stylesheet" href="estilo.css" type="text/css">
+
+</head><body>
+<h1 style="text-align: center;">Agendar Exame de Qualificação<br>
+</h1>
+
+<form action="/enviarprojeto" method="post" name="cadastro"><small>*Todos
+os campos são obrigatórios</small><br>
+  <br>
+Nome do aluno: <input disabled="disabled" maxlength="50" size="50" name="nome"><br>
+  <br>
+Data: <input maxlength="10" size="10" name="data"> (dd/mm/aaaa)<br>
+  <br>
+Horário: <input maxlength="5" size="5" name="horario"> (hh:mm)<br>
+  <br>
+Banca:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nome do orientador: <input disabled="disabled" maxlength="50" size="50" name="nomeorientador"><br>
+  <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Membro avaliador: <input maxlength="50" size="50" name="nomeavaliador"><br>
+  <br>
+  <input name="Enviar" type="submit"> <input value="Cancelar" name="Cancelar" type="button"></form>
+
+</body></html>

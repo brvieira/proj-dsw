@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Informar Parecer do Colegiado</title>
+
+  
+  
+  <link rel="stylesheet" href="estilo.css" type="text/css">
+
+</head><body>
+<h1 style="text-align: center;">Parecer de Projeto</h1>
+
+Nome do aluno: <span style="font-weight: bold;">Nome do aluno</span><br>
+
+<br>
+
+Semestre atual: <span style="font-weight: bold;">x semestre</span><br>
+
+<br>
+
+Nome do orientador: <span style="font-weight: bold;">Nome do orientador</span><br>
+
+<br>
+
+Arquivo do projeto: <span style="font-weight: bold;">baixar</span><br>
+
+<br>
+
+Parecer do Colegiado:<br>
+
+<br>
+
+<form method="post" action="/registrarparecer" name="parecer">Data:&nbsp;<input maxlength="10" size="10" name="data"> (dd/mm/yyyy)<br>
+  <br>
+Parecer:<br>
+  <textarea cols="100" rows="5" maxlength="1000" size="1000" name="texto" value=""></textarea> <br>
+  <br>
+  <input name="Enviar" value="Enviar" type="submit">
+<input name="Cancelar" value="Cancelar" type="button">
+</form>
+
+</body></html>
