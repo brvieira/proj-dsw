@@ -1,10 +1,5 @@
-<%-- 
-    Document   : index
-    Created on : 27/08/2018, 09:18:44
-    Author     : Andre
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,6 +8,6 @@
     </head>
     <body>
         <p><a href="CadastrarUsuario.jsp">Cadastrar Usuário</a>
-        <!--<p><a href="produto?action=visualizar">Visualizar Produtos</a>-->
+        <p><a href="GridUsuarios.jsp">Visualizar Usuários</a>
     </body>
 </html>
