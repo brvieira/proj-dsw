@@ -1,0 +1,66 @@
+body {
+  background-color: #eff7ff;
+  color: #000066;
+}
+
+.caixa {
+  background-color: #ffffff;
+  border-radius: 10px;
+  width: 20%;
+  margin: 15px;
+  padding: 10px;
+  text-align: center;
+  display: block;
+  float:left;
+  position: relative;
+}
+
+.fotoUsuario{
+   border-radius: 20px;
+   width: 200px; 
+   height: 200px;
+   background-color: #ffffff;
+}
+
+.caixaSelecao {
+  background-color: #000000;
+  border-radius: 50%;
+  width: 200px;
+  margin: 30px 15px 15px 15px;
+  float: left;
+  
+}
+
+.linkCaixaSelecao {
+  vertical-align: -12px;
+  color: #FFFFFF;
+}
+
+.textoCaixaSelecao {
+   vertical-align: -12px;
+   color: #FFFFFF;
+   padding: 15px;
+}
+
+.caixaSelecao:hover {
+  background-color: #a9a9a9;
+}
+
+.fotoUsuarioPequena {
+   border-radius: 50px;
+   width: 75px;
+   height: 75px;
+   float: left;
+   background-color: #ffffff;
+}
+
+th {
+   background-color: #658AFF;
+   color: #FFFFFF;
+   text-align: left;
+}
+
+
+.linhacolorida {
+   background-color: #CCECFF;
+}

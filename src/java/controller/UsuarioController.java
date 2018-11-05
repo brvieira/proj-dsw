@@ -6,10 +6,9 @@ import java.util.*;
 
 public class UsuarioController {
 
-    private UsuarioDAO dao = new UsuarioDAO();
+    private final UsuarioDAO dao = new UsuarioDAO();
 
-    public UsuarioController() {
-    }
+    public UsuarioController() {}
 
     public void cadastrar(Usuario u) throws Exception { 
         dao.inserir(u);
@@ -17,6 +16,14 @@ public class UsuarioController {
 
     public void alterar(Usuario u) throws Exception  { 
         dao.alterar(u);
+    }
+    
+    public boolean alterarSenha(int codigo, String senhaAnterior, String senhaNova) throws Exception  { 
+        if (dao.obterUsuario(codigo).getSenha().equals(senhaAnterior)){
+            dao.alterarSenha(codigo, senhaNova);
+            return true;
+        }else
+            return false;
     }
     
     public ArrayList<Usuario> obterUsuarios() throws Exception  {

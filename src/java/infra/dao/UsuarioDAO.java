@@ -73,6 +73,22 @@ public class UsuarioDAO {
             stm.setString(4, user.getSenha());
             stm.setString(5, user.getEmail());
             stm.setBoolean(6, user.getIsProfessor());
+            stm.setInt(7, user.getCodigo());
+            
+            stm.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }        
+    }
+    
+    public void alterarSenha(int codigo, String senha) throws Exception {
+            try {
+            Connection con = ConnectionFactory.obterConexao();
+            PreparedStatement stm = con.prepareStatement("UPDATE produto SET senha = ? WHERE codigo = ?");
+            
+            stm.setString(1, senha);
+            stm.setInt(2, codigo);
             
             stm.executeUpdate();
         } catch (Exception ex) {
