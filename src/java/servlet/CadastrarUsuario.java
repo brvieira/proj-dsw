@@ -44,11 +44,11 @@ public class CadastrarUsuario extends HttpServlet {
             Usuario u = new Usuario();
             
             u.setNome(request.getParameter("nome"));
-            u.setCpf(Integer.valueOf(request.getParameter("cpf").replace(".", "").replace("-", "")));
+            u.setCpf(request.getParameter("cpf"));
             u.setEmail(request.getParameter("email"));
             u.setProntuario(request.getParameter("prontuario"));
-            u.setIsProfessor(Boolean.valueOf(request.getParameter("tipoUsuario")));
-            u.setSenha(request.getParameter(request.getParameter("senha")));
+            u.setIsProfessor(Boolean.parseBoolean(request.getParameter("tipoUsuario")));
+            u.setSenha(request.getParameter("senha"));
             
             uc.cadastrar(u);
             
@@ -75,7 +75,7 @@ public class CadastrarUsuario extends HttpServlet {
             Usuario u = new Usuario();
             
             u.setNome(request.getParameter("nome"));
-            u.setCpf(Integer.valueOf(request.getParameter("cpf").replace(".", "").replace("-", "")));
+            u.setCpf(request.getParameter("cpf"));
             u.setEmail(request.getParameter("email"));
             u.setProntuario(request.getParameter("prontuario"));
             u.setIsProfessor(Boolean.valueOf(request.getParameter("tipoUsuario")));

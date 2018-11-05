@@ -20,7 +20,7 @@ public class UsuarioDAO {
             PreparedStatement stm = con.prepareStatement("INSERT INTO usuario(nome, cpf, prontuario, senha, email, isProfessor) VALUES(?,?,?,?,?,?)");
             
             stm.setString(1, user.getNome());
-            stm.setInt(2, user.getCpf());
+            stm.setString(2, user.getCpf());
             stm.setString(3, user.getProntuario());
             stm.setString(4, user.getSenha());
             stm.setString(5, user.getEmail());
@@ -46,7 +46,7 @@ public class UsuarioDAO {
                 Usuario user = new Usuario();
                 
                 user.setNome(rs.getString("nome"));
-                user.setCpf(rs.getInt("cpf"));
+                user.setCpf(rs.getString("cpf"));
                 user.setProntuario(rs.getString("prontuario"));
                 user.setSenha(rs.getString("senha"));
                 user.setEmail(rs.getString("email"));
@@ -68,7 +68,7 @@ public class UsuarioDAO {
             PreparedStatement stm = con.prepareStatement("UPDATE produto SET nome = ?, cpf = ?, senha = ?, email = ?, isProfessor = ? WHERE codigo = ?");
             
             stm.setString(1, user.getNome());
-            stm.setInt(2, user.getCpf());
+            stm.setString(2, user.getCpf());
             stm.setString(3, user.getProntuario());
             stm.setString(4, user.getSenha());
             stm.setString(5, user.getEmail());
@@ -121,7 +121,7 @@ public class UsuarioDAO {
                 Usuario user = new Usuario();
                 
                 user.setNome(rs.getString("nome"));
-                user.setCpf(rs.getInt("cpf"));
+                user.setCpf(rs.getString("cpf"));
                 user.setProntuario(rs.getString("prontuario"));
                 user.setSenha(rs.getString("senha"));
                 user.setEmail(rs.getString("email"));

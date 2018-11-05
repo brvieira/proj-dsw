@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS usuario;
+
+CREATE TABLE `usuario` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `cpf` varchar(255) NOT NULL,
+  `nome` varchar(255) NOT NULL,
+  `prontuario` varchar(255) NOT NULL,
+  `senha` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `isProfessor` BOOLEAN NOT NULL,
+   PRIMARY KEY (codigo)
+)

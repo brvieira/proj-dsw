@@ -1,11 +1,11 @@
 package model;
 
 public class Usuario {
-    private int cpf, codigo;
-    private String nome, prontuario, senha, email;
+    private int codigo;
+    private String cpf, nome, prontuario, senha, email;
     private boolean isProfessor;
 
-    public Usuario(int cpf, int codigo, String nome, String prontuario, String senha, String email, boolean isProfessor) {
+    public Usuario(String cpf, int codigo, String nome, String prontuario, String senha, String email, boolean isProfessor) {
         this.cpf = cpf;
         this.codigo = codigo;
         this.nome = nome;
@@ -17,11 +17,11 @@ public class Usuario {
     
     public Usuario() {}
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
     

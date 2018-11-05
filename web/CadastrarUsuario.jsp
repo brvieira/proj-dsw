@@ -18,7 +18,7 @@
 <body>
   <h1 style="text-align: center;">Cadastrar Usuário</h1>
 
-  <form action="/CadastrarUsuario?action=cadastrar" method="post" name="cadastro">
+  <form action="CadastrarUsuario?action=cadastrar" method="post" name="cadastro">
     Crie sua conta preenchendo o formulário:<br>
     <small>*Todos os campos são obrigatórios</small><br>
     <br>
