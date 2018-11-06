@@ -35,6 +35,8 @@
     Você é: <input name="tipoUsuario" value="aluno" type="radio">Aluno&nbsp;&nbsp;&nbsp;
     <input name="tipoUsuario" value="professor" type="radio">Professor<br>
     <br>
+    Você é Coordenador ? <input name="isCoordenador" value="aluno" type="checkbox">Sim
+    <br>
     Senha: <input maxlength="12" size="12" name="senha" type="password"><br>
     <br>
     Senha (repetir): <input maxlength="12" size="12" name="senhaRepetir" type="password"><br>

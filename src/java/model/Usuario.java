@@ -3,9 +3,9 @@ package model;
 public class Usuario {
     private int codigo;
     private String cpf, nome, prontuario, senha, email;
-    private boolean isProfessor;
+    private boolean isProfessor, isCoordenador;
 
-    public Usuario(String cpf, int codigo, String nome, String prontuario, String senha, String email, boolean isProfessor) {
+    public Usuario(String cpf, int codigo, String nome, String prontuario, String senha, String email, boolean isProfessor, boolean isCoordenador) {
         this.cpf = cpf;
         this.codigo = codigo;
         this.nome = nome;
@@ -13,6 +13,7 @@ public class Usuario {
         this.senha = senha;
         this.email = email;
         this.isProfessor = isProfessor;
+        this.isCoordenador = isCoordenador;
     }
     
     public Usuario() {}
@@ -71,6 +72,14 @@ public class Usuario {
 
     public void setIsProfessor(boolean isProfessor) {
         this.isProfessor = isProfessor;
+    }
+    
+    public boolean getIsCoordenador() {
+        return isCoordenador;
+    }
+
+    public void setIsCoordenador(boolean isCoordenador) {
+        this.isCoordenador = isCoordenador;
     }
     
 }

@@ -12,11 +12,9 @@
 
 <body>
   <h1 style="text-align: center;">Mudar Senha</h1><br>
-    
-  <jsp:useBean id="Usuario" class="model.Usuario" scope="request" />
 
-  <form action="/CadastrarUsuario?action=mudarsenha" method="post" name="cadastro">
-    <input type="hidden" name="codigo" value="<jsp:getProperty name="Usuario" property="codigo" />" />
+  <form action="CadastrarUsuario?action=mudarsenha" method="post" name="cadastro">
+    <input type="hidden" name="codigo" value="${sessionScope.usuarioLogado.codigo}" />
     
     Senha Atual: <input maxlength="12" size="12" name="senhaAnterior" type="password"><br>
     <br>

@@ -14,7 +14,7 @@ public class UsuarioController {
         dao.inserir(u);
     }
 
-    public void alterar(Usuario u) throws Exception  { 
+    public void alterar(Usuario u) throws Exception { 
         dao.alterar(u);
     }
     
@@ -24,6 +24,10 @@ public class UsuarioController {
             return true;
         }else
             return false;
+    }
+    
+    public Usuario autenticar(String prontuario, String senha) throws Exception  { 
+        return dao.obterUsuarioByProntuario(prontuario, senha);
     }
     
     public ArrayList<Usuario> obterUsuarios() throws Exception  {

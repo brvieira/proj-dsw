@@ -17,7 +17,7 @@ public class UsuarioDAO {
     public void inserir(Usuario user) throws Exception {
         try {
             Connection con = ConnectionFactory.obterConexao();
-            PreparedStatement stm = con.prepareStatement("INSERT INTO usuario(nome, cpf, prontuario, senha, email, isProfessor) VALUES(?,?,?,?,?,?)");
+            PreparedStatement stm = con.prepareStatement("INSERT INTO usuario(nome, cpf, prontuario, senha, email, isProfessor, isCoordenador) VALUES(?,?,?,?,?,?,?)");
             
             stm.setString(1, user.getNome());
             stm.setString(2, user.getCpf());
@@ -25,6 +25,7 @@ public class UsuarioDAO {
             stm.setString(4, user.getSenha());
             stm.setString(5, user.getEmail());
             stm.setBoolean(6, user.getIsProfessor());
+            stm.setBoolean(7, user.getIsCoordenador());
             
             stm.executeUpdate();
         } catch (Exception ex) {
@@ -45,12 +46,14 @@ public class UsuarioDAO {
             {
                 Usuario user = new Usuario();
                 
+                user.setCodigo(rs.getInt("codigo"));
                 user.setNome(rs.getString("nome"));
                 user.setCpf(rs.getString("cpf"));
                 user.setProntuario(rs.getString("prontuario"));
                 user.setSenha(rs.getString("senha"));
                 user.setEmail(rs.getString("email"));
                 user.setIsProfessor(rs.getBoolean("isProfessor"));
+                user.setIsCoordenador(rs.getBoolean("isCoordenador"));
                 
                 usuarios.add(user);
             }
@@ -65,15 +68,13 @@ public class UsuarioDAO {
     public void alterar(Usuario user) throws Exception {
             try {
             Connection con = ConnectionFactory.obterConexao();
-            PreparedStatement stm = con.prepareStatement("UPDATE produto SET nome = ?, cpf = ?, senha = ?, email = ?, isProfessor = ? WHERE codigo = ?");
+            PreparedStatement stm = con.prepareStatement("UPDATE usuario SET nome = ?, cpf = ?, prontuario = ?, email = ? WHERE codigo = ?");
             
             stm.setString(1, user.getNome());
             stm.setString(2, user.getCpf());
             stm.setString(3, user.getProntuario());
-            stm.setString(4, user.getSenha());
-            stm.setString(5, user.getEmail());
-            stm.setBoolean(6, user.getIsProfessor());
-            stm.setInt(7, user.getCodigo());
+            stm.setString(4, user.getEmail());
+            stm.setInt(5, user.getCodigo());
             
             stm.executeUpdate();
         } catch (Exception ex) {
@@ -85,7 +86,7 @@ public class UsuarioDAO {
     public void alterarSenha(int codigo, String senha) throws Exception {
             try {
             Connection con = ConnectionFactory.obterConexao();
-            PreparedStatement stm = con.prepareStatement("UPDATE produto SET senha = ? WHERE codigo = ?");
+            PreparedStatement stm = con.prepareStatement("UPDATE usuario SET senha = ? WHERE codigo = ?");
             
             stm.setString(1, senha);
             stm.setInt(2, codigo);
@@ -119,13 +120,43 @@ public class UsuarioDAO {
             if (rs.next())
             {
                 Usuario user = new Usuario();
-                
+                user.setCodigo(rs.getInt("codigo"));
                 user.setNome(rs.getString("nome"));
                 user.setCpf(rs.getString("cpf"));
                 user.setProntuario(rs.getString("prontuario"));
                 user.setSenha(rs.getString("senha"));
                 user.setEmail(rs.getString("email"));
                 user.setIsProfessor(rs.getBoolean("isProfessor"));
+                user.setIsCoordenador(rs.getBoolean("isCoordenador"));
+                
+                return user;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+        return null;        
+    }
+    
+    public Usuario obterUsuarioByProntuario(String prontuario, String senha) throws Exception {
+        try {
+            Connection con = ConnectionFactory.obterConexao();
+            PreparedStatement stm = con.prepareStatement("SELECT * FROM usuario WHERE prontuario = ? AND senha = ?");            
+            stm.setString(1, prontuario);
+            stm.setString(2, senha);
+            ResultSet rs = stm.executeQuery();
+            
+            if (rs.next())
+            {
+                Usuario user = new Usuario();
+                user.setCodigo(rs.getInt("codigo"));
+                user.setNome(rs.getString("nome"));
+                user.setCpf(rs.getString("cpf"));
+                user.setProntuario(rs.getString("prontuario"));
+                user.setSenha(rs.getString("senha"));
+                user.setEmail(rs.getString("email"));
+                user.setIsProfessor(rs.getBoolean("isProfessor"));
+                user.setIsCoordenador(rs.getBoolean("isCoordenador"));
                 
                 return user;
             }

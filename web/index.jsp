@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <p><a href="login.jsp">Login</a>
         <p><a href="CadastrarUsuario.jsp">Cadastrar Usuário</a>
         <!--<p><a href="produto?action=visualizar">Visualizar Produtos</a>-->
     </body>

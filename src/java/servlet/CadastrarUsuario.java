@@ -20,12 +20,15 @@ public class CadastrarUsuario extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             String action = request.getParameter("action");
-            if (action.equals("cadastrar"))
-                this.cadastrarUsuario(request, response); 
-            else if (action.equals("atualizar"))
+            if (action.equals("cadastrar")) {
+                this.cadastrarUsuario(request, response);
+            } else if (action.equals("atualizar")) {
                 this.atualizarUsuario(request, response);
-            else if (action.equals("mudarsenha"))
+            } else if (action.equals("mudarsenha")) {
                 this.atualizarSenhaUsuario(request, response);
+            } else if (action.equals("autenticar")) {
+                this.autenticar(request, response);
+            }
             /*else if(action.equals("remover"))
                 this.removerProduto(request,response);
             else if(action.equals("visualizar"))
@@ -33,95 +36,140 @@ public class CadastrarUsuario extends HttpServlet {
             
             else if(action.equals("visualizarProduto"))
                 this.visualizarProduto(request, response);*/
-        }finally {
+        } finally {
             out.close();
         }
     }
-    
+
     private void cadastrarUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             UsuarioController uc = new UsuarioController();
             Usuario u = new Usuario();
-            
+
             u.setNome(request.getParameter("nome"));
             u.setCpf(request.getParameter("cpf"));
             u.setEmail(request.getParameter("email"));
             u.setProntuario(request.getParameter("prontuario"));
             u.setIsProfessor(Boolean.parseBoolean(request.getParameter("tipoUsuario")));
+            u.setIsCoordenador(Boolean.parseBoolean(request.getParameter("isCoordenador")));
             u.setSenha(request.getParameter("senha"));
-            
+
             uc.cadastrar(u);
-            
-            request.setAttribute("usuario", u);
-            request.setAttribute("sucesso", true);
-            
-            RequestDispatcher rd = request.getRequestDispatcher("/mensagemUsuarioCadastrado.jsp");
-            
-            rd.forward(request,response);
-        } catch(Exception e) {
+
+            request.getSession().setAttribute("usuarioLogado", u);
+
+            RequestDispatcher rd;
+
+            if (u.getIsProfessor()) {
+                rd = request.getRequestDispatcher("/dashboardProfessor.jsp");
+            } else {
+                rd = request.getRequestDispatcher("/dashboardAluno.jsp");
+            }
+
+            rd.forward(request, response);
+        } catch (Exception e) {
             request.setAttribute("sucesso", false);
-            
-            RequestDispatcher rd = request.getRequestDispatcher("/mensagemUsuarioCadastrado.jsp");
-            
-            rd.forward(request,response);
-            
+
+            RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+
+            rd.forward(request, response);
+
             System.out.println(e);
         }
     }
-    
+
     private void atualizarUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             UsuarioController uc = new UsuarioController();
             Usuario u = new Usuario();
             
+            u.setCodigo(Integer.parseInt(request.getParameter("codigo")));
             u.setNome(request.getParameter("nome"));
             u.setCpf(request.getParameter("cpf"));
             u.setEmail(request.getParameter("email"));
             u.setProntuario(request.getParameter("prontuario"));
-            u.setIsProfessor(Boolean.valueOf(request.getParameter("tipoUsuario")));
-            u.setSenha(request.getParameter(request.getParameter("senha")));
-            
+
             uc.alterar(u);
+
+            request.getSession().setAttribute("usuarioLogado", u);
             
-            request.setAttribute("usuario", u);
-            request.setAttribute("sucesso", true);
-            
-            RequestDispatcher rd = request.getRequestDispatcher("/mensagemUsuarioAtualizado.jsp");
-            
-            rd.forward(request,response);
-        } catch(Exception e) {
+            RequestDispatcher rd;
+
+            if (u.getIsProfessor()) {
+                rd = request.getRequestDispatcher("/dashboardProfessor.jsp");
+            } else {
+                rd = request.getRequestDispatcher("/dashboardAluno.jsp");
+            }
+
+            rd.forward(request, response);
+        } catch (Exception e) {
             request.setAttribute("sucesso", false);
-            
+
             RequestDispatcher rd = request.getRequestDispatcher("/mensagemUsuarioAtualizado.jsp");
-            
-            rd.forward(request,response);
-            
+
+            rd.forward(request, response);
+
             System.out.println(e);
         }
     }
-    
+
     private void atualizarSenhaUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             UsuarioController uc = new UsuarioController();
-            
+
             int codigo = Integer.valueOf(request.getParameter("codigo"));
             String senhaAnterior = request.getParameter("senhaAnterior");
             String senhaNova = request.getParameter("senha");
-            
+
             Boolean senhaAlterada = uc.alterarSenha(codigo, senhaAnterior, senhaNova);
             
-            request.setAttribute("sucesso", senhaAlterada);
-            
-            RequestDispatcher rd = request.getRequestDispatcher("/mensagemUsuarioSenhaAtualizada.jsp");
-            
-            rd.forward(request,response);
-        } catch(Exception e) {
+            RequestDispatcher rd;
+
+            if (senhaAlterada) {
+                rd = request.getRequestDispatcher("/dashboardProfessor.jsp");
+                
+                rd.forward(request, response);
+            } 
+        } catch (Exception e) {
             request.setAttribute("sucesso", false);
-            
+
             RequestDispatcher rd = request.getRequestDispatcher("/mensagemUsuarioSenhaAtualizada.jsp");
-            
-            rd.forward(request,response);
-            
+
+            rd.forward(request, response);
+
+            System.out.println(e);
+        }
+    }
+
+    private void autenticar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            UsuarioController uc = new UsuarioController();
+
+            String prontuario = request.getParameter("prontuario");
+            String senha = request.getParameter("senha");
+
+            Usuario user = uc.autenticar(prontuario, senha);
+
+            RequestDispatcher rd;
+
+            if (user != null) {
+                if (user.getSenha().equalsIgnoreCase(senha)) {
+                    request.getSession().setAttribute("usuarioLogado", user);
+                    if (user.getIsProfessor()) {
+                        rd = request.getRequestDispatcher("/dashboardProfessor.jsp");
+                    } else {
+                        rd = request.getRequestDispatcher("/dashboardAluno.jsp");
+                    }
+                    rd.forward(request, response);
+                }
+            }
+        } catch (Exception e) {
+            request.setAttribute("sucesso", false);
+
+            RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+
+            rd.forward(request, response);
+
             System.out.println(e);
         }
     }
