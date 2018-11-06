@@ -11,23 +11,21 @@
         <script src="./js/bootstrap.min.js"></script>
     </head>    
     <body>
-        <div class="mx-5" style="width: 20%" class="it">
-            <img class="mb-4" src="./images/logo_ifsp.png" style="box-shadow: 2px 2px 2px #cdcdcd; border-radius: 50px">
-            <p>
-                <a href="CadastrarUsuario.jsp">Cadastrar Usuário</a>
-            </p>
-            <p>
-                <a href="GridUsuarios.jsp">Visualizar Usuários</a>
-            </p> 
+    <div class="row d-flex h-100 w-100">
+        <div class="col-md-5 justify-content-end d-flex align-items-center logo-container">
+            <img class="logo-ifsp" src="./images/logo_ifsp.png">
         </div>
-        <form class="form-signin">
-            <h1 class="h3 mb-3 font-weight-normal text-center">TICICI IFSP</h1>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Prontuário" required autofocus>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
-            <button class="btn btn-lg btn-primary btn-block" style="background: #4caf50" type="submit">Entrar</button>
-            <div class="text-center">
-                <a href="#">Ainda não tem cadastro? Clique aqui</a>
-            </div>
-        </form>
+        <div class="col-md-7 d-flex align-items-center">
+            <form class="form-signin">
+                <h1 class="h3 mb-3 font-weight-normal text-center">TICICI IFSP</h1>
+                <input type="email" id="inputEmail" class="form-control" placeholder="Prontuário" required autofocus>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+                <div class="text-center">
+                    <a href="CadastrarUsuario.jsp">Ainda não tem cadastro? Clique aqui</a>
+                </div>
+            </form>
+        </div>
+    </div>
     </body>
 </html>
