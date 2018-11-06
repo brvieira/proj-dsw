@@ -1,7 +1,7 @@
 <%-- 
-    Document   : dashboardAluno
-    Created on : 05/11/2018, 21:20:50
-    Author     : gu_ri
+    Document   : dashboardaluno
+    Created on : 05/11/2018, 19:51:12
+    Author     : a1620037
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,20 +11,20 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="estilo.css" type="text/css">
         <title>Dashboard do Aluno</title>
-
-
     </head>
     <body>
         <div class="caixa">
             <h3>Requisições</h3>
             <br>
-            Não existem requisições pendentes.<br>
+            Não existem requisições pendentes.
+            <br>
         </div>
 
         <div class="caixa">
             <h3> Projeto</h3>
             <br>
-            Você ainda não elaborou seu projeto... mas precisa <a href="selecaoorientador.html">encontrar um orientador</a> antes!<br>
+            Você ainda não elaborou seu projeto... mas precisa <a href="selecaoorientador.html">encontrar um orientador</a> antes!
+            <br>
         </div>
 
         <div class="caixa">
@@ -33,8 +33,8 @@
                 professor</a>!<br>
             <br>
         </div>
-        <h1>${sessionScope.usuarioLogado.codigo}</h1>
-        <a href="AtualizarUsuario.jsp">Atualizar Dados</a>
-        <a href="RecuperarSenhaUsuario.jsp">Alterar Senha</a>
+        <div class="caixa">
+            <a href="alterarusuario.jsp?codigo=${sessionScope.s}"
+        </div>
     </body>
 </html>
