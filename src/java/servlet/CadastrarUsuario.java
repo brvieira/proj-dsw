@@ -29,13 +29,6 @@ public class CadastrarUsuario extends HttpServlet {
             } else if (action.equals("autenticar")) {
                 this.autenticar(request, response);
             }
-            /*else if(action.equals("remover"))
-                this.removerProduto(request,response);
-            else if(action.equals("visualizar"))
-                this.visualizarProdutos(request, response);
-            
-            else if(action.equals("visualizarProduto"))
-                this.visualizarProduto(request, response);*/
         } finally {
             out.close();
         }
@@ -68,13 +61,9 @@ public class CadastrarUsuario extends HttpServlet {
 
             rd.forward(request, response);
         } catch (Exception e) {
-            request.setAttribute("sucesso", false);
-
+            request.setAttribute("Erro", "Exception: " + e);
             RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-
             rd.forward(request, response);
-
-            System.out.println(e);
         }
     }
 
@@ -103,13 +92,9 @@ public class CadastrarUsuario extends HttpServlet {
 
             rd.forward(request, response);
         } catch (Exception e) {
-            request.setAttribute("sucesso", false);
-
+            request.setAttribute("Erro", "Exception: " + e);
             RequestDispatcher rd = request.getRequestDispatcher("/mensagemUsuarioAtualizado.jsp");
-
             rd.forward(request, response);
-
-            System.out.println(e);
         }
     }
 
@@ -124,19 +109,24 @@ public class CadastrarUsuario extends HttpServlet {
             Boolean senhaAlterada = uc.alterarSenha(codigo, senhaAnterior, senhaNova);
             
             RequestDispatcher rd;
-
-            if (senhaAlterada) {
-                rd = request.getRequestDispatcher("/dashboardProfessor.jsp");
-                
-                rd.forward(request, response);
-            } 
-        } catch (Exception e) {
-            request.setAttribute("sucesso", false);
-
-            RequestDispatcher rd = request.getRequestDispatcher("/mensagemUsuarioSenhaAtualizada.jsp");
-
+            String urlDashboard;
+               
+            Usuario userLogado = (Usuario) request.getSession().getAttribute("usuarioLogado");
+            
+            if (userLogado.getIsProfessor())
+                urlDashboard = "/dashboardProfessor.jsp";
+            else
+                urlDashboard = "/dashboardAluno.jsp";
+            
+            if (!senhaAlterada)
+                request.setAttribute("Erro", "SenhaAntigaIncorreta");
+            
+            rd = request.getRequestDispatcher(urlDashboard);   
             rd.forward(request, response);
-
+        } catch (Exception e) {
+            request.setAttribute("Erro", "Exception: " + e);
+            RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+            rd.forward(request, response);
             System.out.println(e);
         }
     }
@@ -151,26 +141,30 @@ public class CadastrarUsuario extends HttpServlet {
             Usuario user = uc.autenticar(prontuario, senha);
 
             RequestDispatcher rd;
-
+            String urlRedirect;
+            
             if (user != null) {
                 if (user.getSenha().equalsIgnoreCase(senha)) {
                     request.getSession().setAttribute("usuarioLogado", user);
-                    if (user.getIsProfessor()) {
-                        rd = request.getRequestDispatcher("/dashboardProfessor.jsp");
-                    } else {
-                        rd = request.getRequestDispatcher("/dashboardAluno.jsp");
-                    }
-                    rd.forward(request, response);
+                    if (user.getIsProfessor())
+                        urlRedirect = "/dashboardProfessor.jsp";
+                    else
+                        urlRedirect = "/dashboardAluno.jsp";
+                } else {
+                    urlRedirect = "/index.jsp";
+                    request.setAttribute("Erro", "SenhaIncorreta");
                 }
+            } else {
+                urlRedirect = "/index.jsp";
+                request.setAttribute("Erro", "UsuarioInexistente");
             }
-        } catch (Exception e) {
-            request.setAttribute("sucesso", false);
-
-            RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
-
+            
+            rd = request.getRequestDispatcher(urlRedirect);
             rd.forward(request, response);
-
-            System.out.println(e);
+        } catch (Exception e) {
+            request.setAttribute("Erro", "Exception: " + e);
+            RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+            rd.forward(request, response);
         }
     }
 

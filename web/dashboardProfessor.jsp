@@ -1,17 +1,34 @@
-<%-- 
-    Document   : dashboardProfessor
-    Created on : 05/11/2018, 21:21:28
-    Author     : gu_ri
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+        <link rel="stylesheet" href="estilo.css" type="text/css">
+        <title>Dashboard do Orientador</title>
     </head>
-    <body>
-        <h1>Professor</h1>
-    </body>
-</html>
+<body>
+<div class="caixa">
+<h3>Requisições</h3>
+<br>
+Não existem requisições pendentes.<br>
+</div>
+
+<div class="caixa">
+<h3> Projetos</h3>
+<br>
+Não existem projetos sob sua orientação.<br>
+</div>
+
+<div class="caixa">
+<h3>Seus orientandos</h3>
+Você ainda não possui orientandos... convide um aluno!<br>
+<br>
+</div>
+
+<div class="caixa">
+<h3>Eventos</h3>
+Não existem bancas marcadas.<br>
+<br>
+</div>
+
+</body></html>
