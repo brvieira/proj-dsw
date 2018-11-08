@@ -55,7 +55,11 @@ public class CadastrarUsuario extends HttpServlet {
 
             if (u.getIsProfessor()) {
                 rd = request.getRequestDispatcher("/dashboardProfessor.jsp");
-            } else {
+            } 
+            else if (u.getIsCoordenador()) {
+                rd = request.getRequestDispatcher("/dashboardCoordenador.jsp");
+            }
+            else {
                 rd = request.getRequestDispatcher("/dashboardAluno.jsp");
             }
 

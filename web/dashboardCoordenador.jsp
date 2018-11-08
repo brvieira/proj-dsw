@@ -30,9 +30,11 @@
             Não existem bancas marcadas.<br>
             <br>
         </div>
+        
         <div class="caixa">
             <a href="AtualizarUsuario.jsp"><button>Alterar Dados</button></a>
+            <a href="AlterarCoordenador.jsp"><button>Alterar Coordenador</button></a>
             <a href="RecuperarSenhaUsuario.jsp"><button>Trocar Senha</button></a>
         </div>
-    </body>
-</html>
+
+    </body></html>
