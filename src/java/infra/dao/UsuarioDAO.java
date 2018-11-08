@@ -17,7 +17,7 @@ public class UsuarioDAO {
     public void inserir(Usuario user) throws Exception {
         try {
             Connection con = ConnectionFactory.obterConexao();
-            PreparedStatement stm = con.prepareStatement("INSERT INTO usuario(nome, cpf, prontuario, senha, email, isProfessor, isCoordenador) VALUES(?,?,?,?,?,?,?)");
+            PreparedStatement stm = con.prepareStatement("INSERT INTO usuario(nome, cpf, prontuario, senha, email, isProfessor) VALUES(?,?,?,?,?,?)");
             
             stm.setString(1, user.getNome());
             stm.setString(2, user.getCpf());
@@ -25,7 +25,6 @@ public class UsuarioDAO {
             stm.setString(4, user.getSenha());
             stm.setString(5, user.getEmail());
             stm.setBoolean(6, user.getIsProfessor());
-            stm.setBoolean(7, user.getIsCoordenador());
             
             stm.executeUpdate();
         } catch (Exception ex) {

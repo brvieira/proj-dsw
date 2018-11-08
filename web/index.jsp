@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>TICICI IFSP</title>
+        <title>TCCando IFSP</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="./css/home.css" />
@@ -16,10 +16,10 @@
             <img class="logo-ifsp" src="./images/logo_ifsp.png">
         </div>
         <div class="col-md-7 d-flex align-items-center">
-            <form class="form-signin">
-                <h1 class="h3 mb-3 font-weight-normal text-center">TICICI IFSP</h1>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Prontuário" required autofocus>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
+            <form class="form-signin" action="CadastrarUsuario?action=autenticar" method="post">
+                <h1 class="h3 mb-3 font-weight-normal text-center">TCCando IFSP</h1>
+                <input name="prontuario" id="inputEmail" class="form-control" placeholder="Prontuário" required autofocus>
+                <input name="senha" type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
                 <div class="text-center">
                     <a href="CadastrarUsuario.jsp">Ainda não tem cadastro? Clique aqui</a>
