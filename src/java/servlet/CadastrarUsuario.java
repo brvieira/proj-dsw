@@ -28,7 +28,12 @@ public class CadastrarUsuario extends HttpServlet {
                 this.atualizarSenhaUsuario(request, response);
             } else if (action.equals("autenticar")) {
                 this.autenticar(request, response);
+            } else if (action.equals("alterarCoordenador")) {
+                this.alterarCoordenador(request, response);
+            } else if (action.equals("sair")) {
+                this.sair(request, response);
             }
+            
         } finally {
             out.close();
         }
@@ -43,8 +48,13 @@ public class CadastrarUsuario extends HttpServlet {
             u.setCpf(request.getParameter("cpf"));
             u.setEmail(request.getParameter("email"));
             u.setProntuario(request.getParameter("prontuario"));
-            u.setIsProfessor(Boolean.parseBoolean(request.getParameter("tipoUsuario")));
-            u.setIsCoordenador(Boolean.parseBoolean(request.getParameter("isCoordenador")));
+            if(request.getParameter("tipoUsuario").equalsIgnoreCase("professor")) {
+                u.setIsProfessor(true);
+            } else {
+                u.setIsProfessor(false);
+            }
+            System.out.println(request.getParameter("tipoUsuario")); 
+            
             u.setSenha(request.getParameter("senha"));
 
             uc.cadastrar(u);
@@ -53,12 +63,14 @@ public class CadastrarUsuario extends HttpServlet {
 
             RequestDispatcher rd;
 
-            if (u.getIsProfessor()) {
-                rd = request.getRequestDispatcher("/dashboardProfessor.jsp");
-            } 
-            else if (u.getIsCoordenador()) {
+            if (u.getIsCoordenador()) {
                 rd = request.getRequestDispatcher("/dashboardCoordenador.jsp");
             }
+            
+            else if (u.getIsProfessor()) {
+                rd = request.getRequestDispatcher("/dashboardProfessor.jsp");
+            } 
+            
             else {
                 rd = request.getRequestDispatcher("/dashboardAluno.jsp");
             }
@@ -88,9 +100,15 @@ public class CadastrarUsuario extends HttpServlet {
             
             RequestDispatcher rd;
 
-            if (u.getIsProfessor()) {
+            if (u.getIsCoordenador()) {
+                rd = request.getRequestDispatcher("/dashboardCoordenador.jsp");
+            }
+            
+            else if (u.getIsProfessor()) {
                 rd = request.getRequestDispatcher("/dashboardProfessor.jsp");
-            } else {
+            } 
+            
+            else {
                 rd = request.getRequestDispatcher("/dashboardAluno.jsp");
             }
 
@@ -116,8 +134,9 @@ public class CadastrarUsuario extends HttpServlet {
             String urlDashboard;
                
             Usuario userLogado = (Usuario) request.getSession().getAttribute("usuarioLogado");
-            
-            if (userLogado.getIsProfessor())
+            if (userLogado.getIsCoordenador())
+                urlDashboard = "/dashboardCoordenador.jsp";
+            else if (userLogado.getIsProfessor())
                 urlDashboard = "/dashboardProfessor.jsp";
             else
                 urlDashboard = "/dashboardAluno.jsp";
@@ -150,7 +169,9 @@ public class CadastrarUsuario extends HttpServlet {
             if (user != null) {
                 if (user.getSenha().equalsIgnoreCase(senha)) {
                     request.getSession().setAttribute("usuarioLogado", user);
-                    if (user.getIsProfessor())
+                    if (user.getIsCoordenador())
+                        urlRedirect = "/dashboardCoordenador.jsp";
+                    else if (user.getIsProfessor())
                         urlRedirect = "/dashboardProfessor.jsp";
                     else
                         urlRedirect = "/dashboardAluno.jsp";
@@ -172,6 +193,59 @@ public class CadastrarUsuario extends HttpServlet {
         }
     }
 
+    private void alterarCoordenador(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            UsuarioController uc = new UsuarioController();
+            Usuario u = new Usuario();
+            
+            u = (Usuario) request.getSession().getAttribute("usuarioLogado");
+            
+            int oldCoordId = u.getCodigo();
+
+            int newCoordId = Integer.parseInt(request.getParameter("newCoordId"));
+ 
+            uc.alterarCoordenador(oldCoordId, newCoordId);
+            
+            u.setIsCoordenador(false);
+            
+            RequestDispatcher rd;
+
+            if (u.getIsCoordenador()) {
+                rd = request.getRequestDispatcher("/dashboardCoordenador.jsp");
+            }
+            
+            else if (u.getIsProfessor()) {
+                rd = request.getRequestDispatcher("/dashboardProfessor.jsp");
+            } 
+            
+            else {
+                rd = request.getRequestDispatcher("/dashboardAluno.jsp");
+            }
+
+            rd.forward(request, response);
+        } catch (Exception e) {
+            request.setAttribute("Erro", "Exception: " + e);
+            RequestDispatcher rd = request.getRequestDispatcher("/mensagemUsuarioAtualizado.jsp");
+            rd.forward(request, response);
+        }
+    }
+    
+    private void sair(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+
+            request.getSession().removeAttribute("usuarioLogado");
+            RequestDispatcher rd;
+
+            rd = request.getRequestDispatcher("/index.jsp");
+
+            rd.forward(request, response);
+        } catch (Exception e) {
+            request.setAttribute("Erro", "Exception: " + e);
+            RequestDispatcher rd = request.getRequestDispatcher("/mensagemUsuarioAtualizado.jsp");
+            rd.forward(request, response);
+        }
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
