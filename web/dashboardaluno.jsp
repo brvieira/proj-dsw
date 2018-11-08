@@ -34,7 +34,8 @@
             <br>
         </div>
         <div class="caixa">
-            <a href="alterarusuario.jsp?codigo=${sessionScope.s}"
+            <a href="AtualizarUsuario.jsp"><button>Alterar Dados</button></a>
+            <a href="RecuperarSenhaUsuario.jsp"><button>Trocar Senha</button></a>
         </div>
     </body>
 </html>

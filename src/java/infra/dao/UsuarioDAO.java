@@ -25,7 +25,6 @@ public class UsuarioDAO {
             stm.setString(4, user.getSenha());
             stm.setString(5, user.getEmail());
             stm.setBoolean(6, user.getIsProfessor());
-            
             stm.executeUpdate();
         } catch (Exception ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);

@@ -16,10 +16,17 @@
             <img class="logo-ifsp" src="./images/logo_ifsp.png">
         </div>
         <div class="col-md-7 d-flex align-items-center">
+<<<<<<< HEAD
             <form class="form-signin" action="CadastrarUsuario?action=autenticar" method="post">
                 <h1 class="h3 mb-3 font-weight-normal text-center">TCCando IFSP</h1>
                 <input name="prontuario" id="inputEmail" class="form-control" placeholder="Prontuário" required autofocus>
                 <input name="senha" type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
+=======
+            <form action="CadastrarUsuario?action=autenticar" method="post" class="form-signin">
+                <h1 class="h3 mb-3 font-weight-normal text-center">TCCando IFSP</h1>
+                <input type="text" id="inputEmail" class="form-control" name="prontuario" placeholder="Prontuário" required autofocus>
+                <input type="password" id="inputPassword" class="form-control" name="senha" placeholder="Senha" required>
+>>>>>>> 9941e1fd90b9c2cb821017703521fe3da7924132
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
                 <div class="text-center">
                     <a href="CadastrarUsuario.jsp">Ainda não tem cadastro? Clique aqui</a>
