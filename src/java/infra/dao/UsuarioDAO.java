@@ -17,7 +17,7 @@ public class UsuarioDAO {
     public void inserir(Usuario user) throws Exception {
         try {
             Connection con = ConnectionFactory.obterConexao();
-            PreparedStatement stm = con.prepareStatement("INSERT INTO usuario(nome, cpf, prontuario, senha, email, isProfessor, isCoordenador) VALUES(?,?,?,?,?,?,?)");
+            PreparedStatement stm = con.prepareStatement("INSERT INTO usuario(nome, cpf, prontuario, senha, email, isProfessor) VALUES(?,?,?,?,?,?)");
             
             stm.setString(1, user.getNome());
             stm.setString(2, user.getCpf());
@@ -25,8 +25,6 @@ public class UsuarioDAO {
             stm.setString(4, user.getSenha());
             stm.setString(5, user.getEmail());
             stm.setBoolean(6, user.getIsProfessor());
-            stm.setBoolean(7, user.getIsCoordenador());
-            
             stm.executeUpdate();
         } catch (Exception ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -167,4 +165,54 @@ public class UsuarioDAO {
         return null;        
     }
 
+    public void alterarCoordenador(int oldCodigo, int newCodigo) throws Exception {
+            try {
+            Connection con = ConnectionFactory.obterConexao(); 
+            
+            PreparedStatement stm1 = con.prepareStatement("UPDATE usuario SET isCoordenador = false WHERE codigo = ?");
+            stm1.setInt(1, oldCodigo);
+            int cod = stm1.executeUpdate();
+            
+            if(cod == 1) {
+                PreparedStatement stm2 = con.prepareStatement("UPDATE usuario SET isCoordenador = true WHERE codigo = ?");
+                stm2.setInt(1, newCodigo);
+                stm2.executeUpdate();
+            }
+            
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }        
+    }
+    
+    public ArrayList obterProfessores() throws Exception {
+        try {
+            ArrayList<Usuario> usuarios = new ArrayList<>();
+
+            Connection con = ConnectionFactory.obterConexao();
+            PreparedStatement stm = con.prepareStatement("SELECT * FROM usuario WHERE isProfessor = true");            
+            ResultSet rs = stm.executeQuery();
+            
+            while(rs.next())
+            {
+                Usuario user = new Usuario();
+                
+                user.setCodigo(rs.getInt("codigo"));
+                user.setNome(rs.getString("nome"));
+                user.setCpf(rs.getString("cpf"));
+                user.setProntuario(rs.getString("prontuario"));
+                user.setSenha(rs.getString("senha"));
+                user.setEmail(rs.getString("email"));
+                user.setIsProfessor(rs.getBoolean("isProfessor"));
+                user.setIsCoordenador(rs.getBoolean("isCoordenador"));
+                
+                usuarios.add(user);
+            }
+            
+            return usuarios;
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+    }
 }

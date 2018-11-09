@@ -29,13 +29,9 @@
     e-mail: <input maxlength="50" size="50" name="email"><br>
     <br>
     Prontuário no IFSP: <input maxlength="10" size="10" name="prontuario"><br>
-    <br>
-    Foto: <input accept="*.jpg; *.jpeg; *.png; *.gif; *.bmp" name="foto" type="file"> <br>
-    <br>
+    <br>    
     Você é: <input name="tipoUsuario" value="aluno" type="radio">Aluno&nbsp;&nbsp;&nbsp;
     <input name="tipoUsuario" value="professor" type="radio">Professor<br>
-    <br>
-    Você é Coordenador ? <input name="isCoordenador" value="aluno" type="checkbox">Sim
     <br>
     Senha: <input maxlength="12" size="12" name="senha" type="password"><br>
     <br>

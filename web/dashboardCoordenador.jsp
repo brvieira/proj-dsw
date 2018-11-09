@@ -33,6 +33,7 @@
         
         <div class="caixa">
             <a href="AtualizarUsuario.jsp"><button>Alterar Dados</button></a>
+            <a href="AlterarCoordenador.jsp"><button>Alterar Coordenador</button></a>
             <a href="RecuperarSenhaUsuario.jsp"><button>Trocar Senha</button></a>
             <a href="CadastrarUsuario?action=sair"><button>Sair</button></a>
         </div>

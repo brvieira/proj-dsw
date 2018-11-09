@@ -41,4 +41,12 @@ public class UsuarioController {
     public void removerProduto(int codigo) throws Exception  {
         dao.remover(codigo);
     }
+    
+    public void alterarCoordenador(int oldCodigo, int newCodigo) throws Exception {
+        dao.alterarCoordenador(oldCodigo, newCodigo);
+    }
+    
+    public ArrayList<Usuario> obterProfessores() throws Exception  {
+        return dao.obterProfessores();
+    }
 }
