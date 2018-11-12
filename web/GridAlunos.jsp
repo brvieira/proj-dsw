@@ -17,7 +17,7 @@
       <th>Prontuário</th>
       <th>Email</th>
       
-      <c:forEach items="${usuarios.obterUsuarios()}" var="u" >
+      <c:forEach items="${usuarios.obterAlunos()}" var="u" >
         <tr>
           <td>${u.codigo}</td>
           <td>${u.nome}</td>

@@ -4,7 +4,7 @@
         <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
 
         <link rel="stylesheet" href="estilo.css" type="text/css">
-        <title>Dashboard do Orientador</title>
+        <title>Dashboard do Coordenador</title>
     </head>
     <body>
         <div class="caixa">
@@ -23,6 +23,20 @@
             <h3>Seus orientandos</h3>
             Você ainda não possui orientandos... convide um aluno!<br>
             <br>
+        </div>
+        
+        <div class="caixa">
+            <h3>Alunos<br></h3>
+            <a href="GridAlunos.jsp"><button>Visualizar Todos Alunos</button></a>
+        </div>
+        
+        <div class="caixa">
+            <h3>Alunos e Orientadores<br></h3>
+            Alunos com orientação: <br>
+            Alunos sem orientação: <br>
+            <b>Relação orientador e orientandos: </b><br>
+            <br>
+            <a href="GridAlunosOrientados.jsp"><button>Orientados x Orientandos</button></a>
         </div>
 
         <div class="caixa">

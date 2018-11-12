@@ -2,6 +2,7 @@ package controller;
         
 import infra.dao.UsuarioDAO;
 import model.Usuario;
+import model.UsuarioOrientador;
 import java.util.*;
 
 public class UsuarioController {
@@ -29,10 +30,6 @@ public class UsuarioController {
     public Usuario autenticar(String prontuario, String senha) throws Exception  { 
         return dao.obterUsuarioByProntuario(prontuario, senha);
     }
-    
-    public ArrayList<Usuario> obterUsuarios() throws Exception  {
-        return dao.obterTodos();
-    }
 
     public Usuario obterUsuario(int codigo) throws Exception  {
         return dao.obterUsuario(codigo);
@@ -48,5 +45,17 @@ public class UsuarioController {
     
     public ArrayList<Usuario> obterProfessores() throws Exception  {
         return dao.obterProfessores();
+    }
+    
+    public ArrayList<Usuario> obterAlunos() throws Exception  {
+        return dao.obterAlunos();
+    }
+    
+    public ArrayList<Usuario> obterAlunosSemOrientacao() throws Exception  {
+        return dao.obterAlunosSemOrientacao();
+    }
+    
+    public ArrayList<UsuarioOrientador> obterAlunosOrientados() throws Exception  {
+        return dao.obterAlunosOrientados();
     }
 }

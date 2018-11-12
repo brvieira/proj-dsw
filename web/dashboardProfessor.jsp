@@ -1,3 +1,4 @@
+<jsp:useBean id="uc" class="controller.UsuarioController"></jsp:useBean>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
     <head>
@@ -22,6 +23,15 @@
         <div class="caixa">
             <h3>Seus orientandos</h3>
             Você ainda não possui orientandos... convide um aluno!<br>
+            <form action="Orientacao?action=alterarOrientando" method="POST">
+            Aluno
+            <select name="usuarioID" id="usuarioID">
+                <c:forEach var="aluno" items="${uc.obterAlunos()}">
+                    <option value="${aluno.codigo}">${aluno.nome}</option>
+                </c:forEach>
+            </select>
+            <button type="submit">Salvar</button>
+        </form>
             <br>
         </div>
 

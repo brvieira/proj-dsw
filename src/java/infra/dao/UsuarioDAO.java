@@ -2,6 +2,7 @@ package infra.dao;
 
 import infra.ConnectionFactory;
 import model.Usuario;
+import model.UsuarioOrientador;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,37 +31,6 @@ public class UsuarioDAO {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
         }        
-    }
-
-    public ArrayList obterTodos() throws Exception {
-        try {
-            ArrayList<Usuario> usuarios = new ArrayList<>();
-
-            Connection con = ConnectionFactory.obterConexao();
-            PreparedStatement stm = con.prepareStatement("SELECT * FROM usuario");            
-            ResultSet rs = stm.executeQuery();
-            
-            while(rs.next())
-            {
-                Usuario user = new Usuario();
-                
-                user.setCodigo(rs.getInt("codigo"));
-                user.setNome(rs.getString("nome"));
-                user.setCpf(rs.getString("cpf"));
-                user.setProntuario(rs.getString("prontuario"));
-                user.setSenha(rs.getString("senha"));
-                user.setEmail(rs.getString("email"));
-                user.setIsProfessor(rs.getBoolean("isProfessor"));
-                user.setIsCoordenador(rs.getBoolean("isCoordenador"));
-                
-                usuarios.add(user);
-            }
-            
-            return usuarios;
-        } catch (Exception ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw ex;
-        }
     }
 
     public void alterar(Usuario user) throws Exception {
@@ -215,4 +185,93 @@ public class UsuarioDAO {
             throw ex;
         }
     }
+    
+    public ArrayList obterAlunos() throws Exception {
+        try {
+            ArrayList<Usuario> usuarios = new ArrayList<>();
+
+            Connection con = ConnectionFactory.obterConexao();
+            PreparedStatement stm = con.prepareStatement("SELECT * FROM usuario WHERE isProfessor = false AND isCoordenador = false");            
+            ResultSet rs = stm.executeQuery();
+            
+            while(rs.next())
+            {
+                Usuario user = new Usuario();
+                
+                user.setCodigo(rs.getInt("codigo"));
+                user.setNome(rs.getString("nome"));
+                user.setCpf(rs.getString("cpf"));
+                user.setProntuario(rs.getString("prontuario"));
+                user.setSenha(rs.getString("senha"));
+                user.setEmail(rs.getString("email"));
+                user.setIsProfessor(rs.getBoolean("isProfessor"));
+                user.setIsCoordenador(rs.getBoolean("isCoordenador"));
+                
+                usuarios.add(user);
+            }
+            
+            return usuarios;
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+    }
+
+    public ArrayList obterAlunosOrientados() throws Exception {
+        try {
+            ArrayList<UsuarioOrientador> usuarioOrientador = new ArrayList<>();
+
+            Connection con = ConnectionFactory.obterConexao();
+            PreparedStatement stm = con.prepareStatement("SELECT u.nome AS 'aluno', u2.nome AS 'orientador' FROM usuarioorientador uo INNER JOIN usuario u ON u.codigo = uo.usuarioID "
+                    + "INNER JOIN usuario u2 ON u2.codigo = uo.orientadorID WHERE uo.orientacaoAceita = true");            
+            ResultSet rs = stm.executeQuery();
+            
+            while(rs.next())
+            {
+                UsuarioOrientador uc = new UsuarioOrientador();
+                
+                uc.setAluno(rs.getString("aluno"));
+                uc.setOrientador(rs.getString("orientador"));
+                
+                usuarioOrientador.add(uc);
+            }
+            
+            return usuarioOrientador;
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+    }
+    
+    public ArrayList obterAlunosSemOrientacao() throws Exception {
+        try {
+            ArrayList<Usuario> usuarios = new ArrayList<>();
+
+            Connection con = ConnectionFactory.obterConexao();
+            PreparedStatement stm = con.prepareStatement("SELECT * FROM usuario WHERE isProfessor = false AND isCoordenador = false");            
+            ResultSet rs = stm.executeQuery();
+            
+            while(rs.next())
+            {
+                Usuario user = new Usuario();
+                
+                user.setCodigo(rs.getInt("codigo"));
+                user.setNome(rs.getString("nome"));
+                user.setCpf(rs.getString("cpf"));
+                user.setProntuario(rs.getString("prontuario"));
+                user.setSenha(rs.getString("senha"));
+                user.setEmail(rs.getString("email"));
+                user.setIsProfessor(rs.getBoolean("isProfessor"));
+                user.setIsCoordenador(rs.getBoolean("isCoordenador"));
+                
+                usuarios.add(user);
+            }
+            
+            return usuarios;
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+    }
+
 }
