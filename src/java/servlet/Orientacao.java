@@ -32,17 +32,15 @@ public class Orientacao extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Orientacao</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Orientacao at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        PrintWriter out = response.getWriter();
+        try {
+            String action = request.getParameter("action");
+            if (action.equals("convidar")) {
+                this.convidarOrientacao(request, response);
+            }
+            
+        } finally {
+            out.close();
         }
     }
 
@@ -84,5 +82,11 @@ public class Orientacao extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void convidarOrientacao(HttpServletRequest request, HttpServletResponse response) {
+        String convidadoId = request.getParameter("convidadoId");
+        
+        System.out.println("Id do orientador" + convidadoId);
+    }
 
 }
