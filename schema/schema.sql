@@ -55,3 +55,7 @@
     FOREIGN KEY(`segundoMembroID`) REFERENCES usuario(codigo),
     PRIMARY KEY(`codigo`)
   );
+
+INSERT INTO usuario VALUES(NULL, "42530524874", "Bruno Vieira", "a1620037", "1234", "bruno@gmail.com", true, true);
+INSERT INTO usuario VALUES(NULL, "42530523424", "Gustavo", "a1620033", "1234", "gustavo@gmail.com", true, false);
+INSERT INTO usuario VALUES(NULL, "42530524534", "Tiago", "a1620035", "1234", "bolacha@gmail.com", false, false);
