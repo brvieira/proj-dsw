@@ -23,7 +23,7 @@
 
         <div class="caixa">
             <h3>Seu orientador</h3>
-            Você ainda não possui orientador... <a href="selecaoorientador.html">convide um
+            Você ainda não possui orientador... <a href="GridProfessores.jsp">convide um
                 professor</a>!<br>
             <br>
         </div>
