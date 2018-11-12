@@ -196,9 +196,8 @@ public class CadastrarUsuario extends HttpServlet {
     private void alterarCoordenador(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             UsuarioController uc = new UsuarioController();
-            Usuario u = new Usuario();
             
-            u = (Usuario) request.getSession().getAttribute("usuarioLogado");
+            Usuario u = (Usuario) request.getSession().getAttribute("usuarioLogado");
             
             int oldCoordId = u.getCodigo();
 

@@ -1,4 +1,5 @@
-<jsp:useBean id="uc" class="controller.UsuarioController"></jsp:useBean>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<jsp:useBean id="uc" class="controller.UsuarioOrientadorController"></jsp:useBean>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
     <head>
@@ -10,7 +11,7 @@
     <body>
         <div class="caixa">
             <h3>Requisições</h3>
-            <br>
+            <br>    
             Não existem requisições pendentes.<br>
         </div>
 
@@ -22,15 +23,14 @@
 
         <div class="caixa">
             <h3>Seus orientandos</h3>
-            Você ainda não possui orientandos... convide um aluno!<br>
-            <form action="Orientacao?action=alterarOrientando" method="POST">
-            Aluno
-            <select name="usuarioID" id="usuarioID">
-                <c:forEach var="aluno" items="${uc.obterAlunos()}">
+            Você ainda não possui orientandos... convide um aluno!<br><br>
+            <form action="Orientacao?action=convidar" method="POST">
+            <select name="convidadoId" id="convidadoId">
+                <c:forEach var="aluno" items="${uc.obterAlunosSemOrientacao()}">
                     <option value="${aluno.codigo}">${aluno.nome}</option>
                 </c:forEach>
             </select>
-            <button type="submit">Salvar</button>
+            <button type="submit">Convidar</button>
         </form>
             <br>
         </div>

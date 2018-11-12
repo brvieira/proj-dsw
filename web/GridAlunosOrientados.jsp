@@ -1,6 +1,5 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean id="usuarios" class="controller.UsuarioController"/>                
+<jsp:useBean id="usuarios" class="controller.UsuarioOrientadorController"/>                
 
 <!DOCTYPE html>
 <html>

@@ -1,9 +1,3 @@
-<%-- 
-    Document   : dashboardaluno
-    Created on : 05/11/2018, 19:51:12
-    Author     : a1620037
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
