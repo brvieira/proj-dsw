@@ -31,7 +31,7 @@
           <td>${u.cpf}</td>
           <td>${u.prontuario}</td>
           <td>${u.email}</td>
-          <td><a href="Orientacao?action=convidar&convidadoId=${u.codigo}">Convidar</a></td>
+          <td><a href="Orientacao?action=convidar&convidadoId=${u.codigo}&perfil=aluno">Convidar</a></td>
         </tr>
       </c:forEach>
     </table>

@@ -1,28 +1,41 @@
 package model;
 
 public class UsuarioOrientador {
-    private String aluno, orientador;
-
-    public UsuarioOrientador(String aluno, String orientador) {
+    private Usuario aluno, orientador;
+    private boolean orientacaoAceita;
+    
+     public UsuarioOrientador() {
+         
+    }
+     
+    public UsuarioOrientador(Usuario aluno, Usuario orientador, boolean orientacaoAceita) {
         this.aluno = aluno;
         this.orientador = orientador;
+        this.orientacaoAceita = orientacaoAceita;
     }
-    
-    public UsuarioOrientador() {}
 
-    public String getAluno() {
+    public Usuario getAluno() {
         return aluno;
     }
 
-    public void setAluno(String aluno) {
+    public void setAluno(Usuario aluno) {
         this.aluno = aluno;
     }
-    
-    public String getOrientador() {
+
+    public Usuario getOrientador() {
         return orientador;
     }
 
-    public void setOrientador(String orientador) {
+    public void setOrientador(Usuario orientador) {
         this.orientador = orientador;
     }
+
+    public boolean isOrientacaoAceita() {
+        return orientacaoAceita;
+    }
+
+    public void setOrientacaoAceita(boolean orientacaoAceita) {
+        this.orientacaoAceita = orientacaoAceita;
+    }
+        
 }
