@@ -1,8 +1,11 @@
 package servlet;
 
 import controller.UsuarioController;
+import controller.UsuarioOrientadorController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +17,8 @@ import model.Usuario;
 @WebServlet(name = "Orientacao", urlPatterns = {"/Orientacao"})
 public class Orientacao extends HttpServlet {
 
+    private UsuarioOrientadorController controller = new UsuarioOrientadorController();
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -21,6 +26,12 @@ public class Orientacao extends HttpServlet {
             String action = request.getParameter("action");
             if (action.equals("convidar")) {
                 this.convidarOrientacao(request, response);
+            }
+            else if (action.equals("cancelar")) {
+                this.cancelarConvite(request, response);
+            }
+            else if (action.equals("aceitar")) {
+                this.aceitarConvite(request, response);
             }
             
         } finally {
@@ -68,9 +79,95 @@ public class Orientacao extends HttpServlet {
     }// </editor-fold>
 
     private void convidarOrientacao(HttpServletRequest request, HttpServletResponse response) {
-        String convidadoId = request.getParameter("convidadoId");
+        int convidadoID = Integer.parseInt(request.getParameter("convidadoId"));
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
+        int usuarioID = usuario.getCodigo();
+                
+        RequestDispatcher rd;
         
-        System.out.println("Id do orientador" + convidadoId);
+        try {
+            if (usuario.getIsCoordenador()) {
+                controller.enviarSolicitacao(convidadoID, usuarioID, true);
+                rd = request.getRequestDispatcher("/dashboardCoordenador.jsp");
+            }
+            
+            else if (usuario.getIsProfessor()) {
+                controller.enviarSolicitacao(convidadoID, usuarioID, true);
+                rd = request.getRequestDispatcher("/dashboardProfessor.jsp");
+            } 
+            
+            else {
+                controller.enviarSolicitacao(usuarioID, convidadoID, false);
+                rd = request.getRequestDispatcher("/dashboardAluno.jsp");
+            }
+            
+            rd.forward(request, response);
+        
+        } catch (Exception ex) {
+            Logger.getLogger(Orientacao.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }
+
+    private void cancelarConvite(HttpServletRequest request, HttpServletResponse response) {
+        int convidadoID = Integer.parseInt(request.getParameter("convidadoId"));
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
+        int usuarioID = usuario.getCodigo();
+        
+        RequestDispatcher rd;
+                
+        try {
+            
+            if (usuario.getIsCoordenador()) {
+                controller.cancelarConvite(convidadoID, usuarioID, true);
+                rd = request.getRequestDispatcher("/dashboardCoordenador.jsp");
+            }
+            
+            else if (usuario.getIsProfessor()) {
+                controller.cancelarConvite(convidadoID, usuarioID, true);
+                rd = request.getRequestDispatcher("/dashboardProfessor.jsp");
+            } 
+            
+            else {
+                controller.cancelarConvite(usuarioID, convidadoID, false);
+                rd = request.getRequestDispatcher("/dashboardAluno.jsp");
+            }
+            
+            rd.forward(request, response);
+        
+        } catch (Exception ex) {
+            Logger.getLogger(Orientacao.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }
+
+    private void aceitarConvite(HttpServletRequest request, HttpServletResponse response) {
+        int convidadoID = Integer.parseInt(request.getParameter("convidadoId"));
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
+        int usuarioID = usuario.getCodigo();
+        
+        RequestDispatcher rd;
+                
+        try {
+            
+            if (usuario.getIsCoordenador()) {
+                controller.aceitarConvite(convidadoID, usuarioID);
+                rd = request.getRequestDispatcher("/dashboardCoordenador.jsp");
+            }
+            
+            else if (usuario.getIsProfessor()) {
+                controller.aceitarConvite(convidadoID, usuarioID);
+                rd = request.getRequestDispatcher("/dashboardProfessor.jsp");
+            } 
+            
+            else {
+                controller.aceitarConvite(usuarioID, convidadoID);
+                rd = request.getRequestDispatcher("/dashboardAluno.jsp");
+            }
+            
+            rd.forward(request, response);
+        
+        } catch (Exception ex) {
+            Logger.getLogger(Orientacao.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }
 
 }
