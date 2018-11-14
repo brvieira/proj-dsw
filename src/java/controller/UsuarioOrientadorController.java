@@ -60,4 +60,9 @@ public class UsuarioOrientadorController {
     public void aceitarConvite(int usuarioID, int orientadorID) throws Exception {
         dao.aceitarOrientacao(usuarioID, orientadorID);
     }
+    
+    public ArrayList obterOrientandosByProfessor(int professorID) throws Exception {
+        return dao.obterOrientandosByProfessor(professorID);
+    }
+    
 }

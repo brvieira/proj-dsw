@@ -304,6 +304,46 @@ public class UsuarioOrientadorDAO {
         }
     }
 
+    public ArrayList obterOrientandosByProfessor(int professorID) throws Exception {
+        try {
+            ArrayList<UsuarioOrientador> usuarioOrientador = new ArrayList<>();
+            PreparedStatement stm = con.prepareStatement("SELECT u.nome AS 'aluno', u.codigo AS 'alunoCodigo', u.email AS 'alunoEmail', u.prontuario AS 'alunoProntuario', u2.nome AS 'professor', u2.codigo AS 'professorCodigo', u2.email AS 'professorEmail', u2.prontuario AS 'professorProntuario' FROM usuarioOrientador uo INNER JOIN usuario u ON u.codigo = uo.usuarioID "
+                    + "INNER JOIN usuario u2 ON u2.codigo = uo.orientadorID WHERE uo.orientacaoAceita = true AND uo.orientadorID = ?");            
+            
+            stm.setInt(1, professorID);
+            
+            ResultSet rs = stm.executeQuery();
+            
+            while(rs.next())
+            {
+                UsuarioOrientador uc = new UsuarioOrientador();
+                Usuario aluno = new Usuario();
+                Usuario professor = new Usuario();
+                
+                aluno.setCodigo(rs.getInt("alunoCodigo"));
+                aluno.setNome(rs.getString("aluno"));
+                aluno.setProntuario(rs.getString("alunoProntuario"));
+                aluno.setEmail(rs.getString("alunoEmail"));
+                
+                professor.setCodigo(rs.getInt("professorCodigo"));
+                professor.setNome(rs.getString("professor"));
+                professor.setProntuario(rs.getString("professorProntuario"));
+                professor.setEmail(rs.getString("professorEmail"));
+                
+                uc.setAluno(aluno);
+                uc.setOrientador(professor);
+                uc.setOrientacaoAceita(true);
+                
+                usuarioOrientador.add(uc);
+            }
+            
+            return usuarioOrientador;
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+    }
+    
     public void cancelarConvite(int usuarioID, int orientadorID, boolean conviteProfessor) throws Exception {
         try {
             
