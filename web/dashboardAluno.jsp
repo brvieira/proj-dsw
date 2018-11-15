@@ -132,12 +132,10 @@
             <div class="my-3 p-3 bg-white rounded shadow-sm">
                 <h6 class="border-bottom border-gray pb-2 mb-0">Projeto</h6>
                 <div class="media text-muted pt-3">
-                    <c:if test="${controller.obterOrientador(sessionScope.usuarioLogado.codigo) == null}">
-                        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                            Você ainda não elaborou seu projeto...
-                            <a href="selecaoorientador.html">Enviar proposta de projeto!</a>
-                        </p>
-                    </c:if>
+                    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                        Você ainda não elaborou seu projeto...
+                        <a href="selecaoorientador.html">Enviar proposta de projeto!</a>
+                    </p>
                 </div>
             </div>
         </c:if>
