@@ -6,26 +6,34 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Usuários</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Alunos</title>
+        <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" />
     </head>
     <body>
-    <p>
-    <table border="1px" bordercolor="#FF0000">
-      <th>Código</th>
-      <th>Nome</th>
-      <th>CPF</th>
-      <th>Prontuário</th>
-      <th>Email</th>
-      
-      <c:forEach items="${usuarios.obterAlunos()}" var="u" >
-        <tr>
-          <td>${u.codigo}</td>
-          <td>${u.nome}</td>
-          <td>${u.cpf}</td>
-          <td>${u.prontuario}</td>
-          <td>${u.email}</td>
-        </tr>
-      </c:forEach>
+        <h2 class="text-center mt-4 mb-4">Alunos</h2>
+    
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Prontuário</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${usuarios.obterAlunos()}" var="u" >
+              <tr>
+                <td>${u.codigo}</td>
+                <td>${u.nome}</td>
+                <td>${u.cpf}</td>
+                <td>${u.prontuario}</td>
+                <td>${u.email}</td>
+              </tr>
+            </c:forEach>
+        </tbody>
     </table>
     </body>
 </html>
