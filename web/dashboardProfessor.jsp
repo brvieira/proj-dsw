@@ -86,10 +86,10 @@
 
         <div class="caixa">
             <h3>Seus orientandos</h3>
-            <c:if test="${controller.obterOrientandosByProfessor(sessionScope.usuarioLogado.codigo) == null}">
+            <c:if test="${controller.obterOrientandosByProfessor(sessionScope.usuarioLogado.codigo).size() == 0}">
             Você ainda não possui orientandos... convide um aluno!<br><br>
             </c:if>
-            <c:if test="${controller.obterOrientandosByProfessor(sessionScope.usuarioLogado.codigo) != null}">
+            <c:if test="${controller.obterOrientandosByProfessor(sessionScope.usuarioLogado.codigo).size() != 0}">
                 <table>
                 <thead>
                     <th>Aluno</th>

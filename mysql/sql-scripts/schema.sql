@@ -22,6 +22,7 @@
     `usuarioID` INT(11) NOT NULL,
     `orientadorID` INT(11) NOT NULL,
     `orientacaoAceita` BOOLEAN DEFAULT FALSE,
+    `conviteProfessor` BOOLEAN DEFAULT FALSE,
     FOREIGN KEY(`usuarioID`) REFERENCES usuario(codigo),
     FOREIGN KEY(`orientadorID`) REFERENCES usuario(codigo)
   );
