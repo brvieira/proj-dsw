@@ -18,7 +18,7 @@
       <div class="py-5 text-center">
         <h2>Cadastrar Usuário</h2>
         <p class="lead">Crie sua conta preenchendo o formulário:</p>
-        <small>Já sou usuário? <a href="#">Fazer Login</a></small>
+        <small>Já sou usuário? <a href="index.jsp">Fazer Login</a></small>
         <br>
         <small>*Todos os campos são obrigatórios</small>
       </div>
