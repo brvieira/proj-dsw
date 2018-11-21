@@ -121,17 +121,16 @@
                 </c:if>
             </div>
         </div>
-
         <div class="my-3 p-3 bg-white rounded shadow-sm">
             <h6 class="border-bottom border-gray pb-2 mb-0">Seus Orientandos</h6>
             <div class="media text-muted pt-3">
-                <c:if test="${controller.obterOrientandosByProfessor(sessionScope.usuarioLogado.codigo) == null}">
+                <c:if test="${controller.obterOrientandosByProfessor(sessionScope.usuarioLogado.codigo).size() == 0}">
                     <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                         Você ainda não possui orientandos... convide um aluno!
                     </p>
                 </c:if>
 
-                <c:if test="${controller.obterOrientandosByProfessor(sessionScope.usuarioLogado.codigo) != null}">
+                <c:if test="${controller.obterOrientandosByProfessor(sessionScope.usuarioLogado.codigo).size() != 0}">
                     <table class="table">
                         <thead>
                             <th>Professor</th>
@@ -150,7 +149,6 @@
                     </table>
                 </c:if>
             </div>
-
             <form action="Orientacao?action=convidar" method="POST">
                 <div class="media text-muted pt-3 d-flex w-100">
                         <div class="px-2 w-100">
