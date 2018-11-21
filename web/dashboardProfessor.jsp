@@ -80,9 +80,9 @@
                             <tbody>
                                 <c:forEach items="${controller.convitesEnviadosByProfessor(sessionScope.usuarioLogado.codigo)}" var="p">
                                     <tr>
-                                        <td>${p.orientador.nome}</td>
-                                        <td>${p.orientador.email}</td>
-                                        <td><a href="Orientacao?action=cancelar&convidadoId=${p.orientador.codigo}">Cancelar</a></td>
+                                        <td>${p.aluno.nome}</td>
+                                        <td>${p.aluno.email}</td>
+                                        <td><a href="Orientacao?action=cancelar&convidadoId=${p.aluno.codigo}">Cancelar</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

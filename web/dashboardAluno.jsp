@@ -101,8 +101,7 @@
                 <div class="media text-muted pt-3">
                     <c:if test="${controller.convitesRecebidosByAluno(sessionScope.usuarioLogado.codigo).size() == 0}">
                         <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                            Você ainda não possui orientador...
-                            <a href="GridProfessores.jsp">convide um professor!</a>
+                            Nenhum convite recebido até o momento.
                         </p>
                     </c:if>
 

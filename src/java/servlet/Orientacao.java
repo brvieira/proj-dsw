@@ -87,12 +87,12 @@ public class Orientacao extends HttpServlet {
         
         try {
             if (usuario.getIsCoordenador()) {
-                controller.enviarSolicitacao(convidadoID, usuarioID, true);
+                controller.enviarSolicitacao(usuarioID, convidadoID, true);
                 rd = request.getRequestDispatcher("/dashboardCoordenador.jsp");
             }
             
             else if (usuario.getIsProfessor()) {
-                controller.enviarSolicitacao(convidadoID, usuarioID, true);
+                controller.enviarSolicitacao(usuarioID, convidadoID, true);
                 rd = request.getRequestDispatcher("/dashboardProfessor.jsp");
             } 
             
