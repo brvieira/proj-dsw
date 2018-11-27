@@ -2,6 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="usuarios" class="controller.UsuarioController"/>     
 <jsp:useBean id="controller" class="controller.UsuarioOrientadorController"/>
+<jsp:useBean id="prjController" class="controller.ProjetoController"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -41,18 +42,38 @@
             <div class="my-3 p-3 bg-white rounded shadow-sm">
                 <h6 class="border-bottom border-gray pb-2 mb-0">Projetos</h6>
                 <div class="media text-muted pt-3">
+                    <c:if test="${prjController.obterProjetosPendentesColegiado().size() == 0}">
                     <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                        Não existem projetos sob sua orientação.
+                        Não existem projetos enviados ao colegiado.
                     </p>
-                </div>
-            </div>
-
-            <div class="my-3 p-3 bg-white rounded shadow-sm">
-                <h6 class="border-bottom border-gray pb-2 mb-0">Seus Orientandos</h6>
-                <div class="media text-muted pt-3">
-                    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                        Você ainda não possui orientandos... convide um aluno!
-                    </p>
+                    </c:if>
+                    
+                    <c:if test="${prjController.obterProjetosPendentesColegiado().size() != 0}">
+                        <table class="table">
+                            <thead>
+                                <th>Aluno</th>
+                                <th>Título</th>
+                                <th>Projeto em análise pelo Colegiado ?</th>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${prjController.obterProjetosPendentesColegiado()}" var="p">
+                                    <tr>
+                                        <td>${p.aluno.nome}</td>
+                                        <td>${p.nome}</td>
+                                        <td>
+                                            <c:if test="${p.projetoRecebidoAnalise != true}">
+                                                ${p.projetoRecebidoAnalise} - <a href="Projeto?action=confirmarRecebimento&codigo=${p.codigo}">Confirmar Recebimento</a>
+                                            </c:if>
+                                            <c:if test="${p.projetoRecebidoAnalise == true}">
+                                                ${p.projetoRecebidoAnalise}
+                                            </c:if>
+                                            
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </c:if>
                 </div>
             </div>
 

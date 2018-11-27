@@ -1,6 +1,5 @@
 package servlet;
 
-import controller.UsuarioController;
 import controller.UsuarioOrientadorController;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +16,7 @@ import model.Usuario;
 @WebServlet(name = "Orientacao", urlPatterns = {"/Orientacao"})
 public class Orientacao extends HttpServlet {
 
-    private UsuarioOrientadorController controller = new UsuarioOrientadorController();
+    private final UsuarioOrientadorController controller = new UsuarioOrientadorController();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");

@@ -2,6 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:useBean id="controller" class="controller.UsuarioOrientadorController"/>
+<jsp:useBean id="prjController" class="controller.ProjetoController"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,13 +28,65 @@
     </div>
 
     <main role="main" class="container dashboard-main">
-
+        
         <div class="my-3 p-3 bg-white rounded shadow-sm">
             <h6 class="border-bottom border-gray pb-2 mb-0">Projetos</h6>
             <div class="media text-muted pt-3">
-                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                    Não existem projetos sob sua orientação.
-                </p>
+                
+                <c:if test="${controller.obterOrientandosByProfessor(sessionScope.usuarioLogado.codigo).size() == 0}">
+                    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                        Você ainda não possui orientandos... convide um aluno!
+                    </p>
+                </c:if>
+                    
+                    
+                <c:if test="${controller.obterOrientandosByProfessor(sessionScope.usuarioLogado.codigo).size() != 0}">
+                    <c:forEach items="${controller.obterOrientandosByProfessor(sessionScope.usuarioLogado.codigo)}" var="p">                    
+                        <c:if test="${prjController.obterProjetosByUsuarioID(p.aluno.codigo).size() == 0}">
+                        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                            Não existem projetos enviados pelo ${p.aluno.nome} ainda.
+                        </p>
+                        </c:if>
+                        
+                        <c:if test="${prjController.obterProjetosByUsuarioID(p.aluno.codigo).size() != 0}">
+                            <table class="table">
+                                <thead>
+                                    <th>Orientando</th>
+                                    <th>Titulo</th>
+                                    <th>Enviado ao Colegiado ?</th>
+                                    <th>Aprovado pelo Orientador ?</th>
+                                    <th>Em Análise pelo Coordenador ?</th>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${prjController.obterProjetosByUsuarioID(p.aluno.codigo)}" var="a">
+                                    <tr>
+                                        <td>${p.aluno.nome}</td>
+                                        <td>${a.nome}</td>
+                                        <td>
+                                            <c:if test="${a.projetoEnviadoColegiado == true}">
+                                                ${a.projetoEnviadoColegiado} - <a href="Projeto?action=cancelarEnvio&codigo=${a.codigo}">Cancelar Envio</a>
+                                            </c:if>
+                                            <c:if test="${a.projetoEnviadoColegiado != true}">
+                                                ${a.projetoEnviadoColegiado}
+                                            </c:if>
+                                        </td>
+                                        <td>
+                                            <c:if test="${a.projetoEnviadoColegiadoConcordado != true}">
+                                                ${a.projetoEnviadoColegiadoConcordado} - <a href="Projeto?action=aprovarEnvio&codigo=${a.codigo}">Aprovar Projeto</a>
+                                            </c:if>
+                                            <c:if test="${a.projetoEnviadoColegiadoConcordado == true}">
+                                                ${a.projetoEnviadoColegiadoConcordado}
+                                            </c:if>
+                                        </td>
+                                        <td>${a.projetoRecebidoAnalise}</td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </c:if>
+                    </c:forEach>
+                </c:if>
+                
             </div>
         </div>
 
