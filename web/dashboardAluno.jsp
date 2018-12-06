@@ -2,6 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:useBean id="controller" class="controller.UsuarioOrientadorController"/>
+<jsp:useBean id="prjController" class="controller.ProjetoController"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -131,10 +132,40 @@
             <div class="my-3 p-3 bg-white rounded shadow-sm">
                 <h6 class="border-bottom border-gray pb-2 mb-0">Projeto</h6>
                 <div class="media text-muted pt-3">
-                    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                        Você ainda não elaborou seu projeto...
-                        <a href="EnvioProjetoColegiado.jsp">Enviar proposta de projeto!</a>
-                    </p>
+                    <c:if test="${prjController.obterProjetosByUsuarioID(sessionScope.usuarioLogado.codigo).size() == 0}">
+                        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                            Você ainda não elaborou seu projeto...
+                            <a href="EnvioProjetoColegiado.jsp">Enviar proposta de projeto!</a>
+                        </p>
+                    </c:if>
+
+                    <c:if test="${prjController.obterProjetosByUsuarioID(sessionScope.usuarioLogado.codigo).size() != 0}">
+                        <table class="table">
+                            <thead>
+                                <th>Titulo</th>
+                                <th>Enviado ao Colegiado ?</th>
+                                <th>Aprovado pelo Orientador ?</th>
+                                <th>Em Análise pelo Coordenador ?</th>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${prjController.obterProjetosByUsuarioID(sessionScope.usuarioLogado.codigo)}" var="p">
+                                    <tr>
+                                        <td>${p.nome}</td>
+                                        <td>
+                                            <c:if test="${p.projetoEnviadoColegiado != true}">
+                                                ${p.projetoEnviadoColegiado} - <a href="Projeto?action=enviarProjeto&codigo=${p.codigo}">Enviar Projeto</a>
+                                            </c:if>
+                                            <c:if test="${p.projetoEnviadoColegiado == true}">
+                                                ${p.projetoEnviadoColegiado}
+                                            </c:if>
+                                        </td>
+                                        <td>${p.projetoEnviadoColegiadoConcordado}</td>
+                                        <td>${p.projetoRecebidoAnalise}</td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </c:if>
                 </div>
             </div>
         </c:if>

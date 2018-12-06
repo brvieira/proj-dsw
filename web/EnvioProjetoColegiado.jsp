@@ -14,7 +14,7 @@
     <h1 style="text-align: center;">Enviar Projeto ao Colegiado<br>
 </h1>
 
-<form action="/enviarprojeto" method="post" name="cadastro"><small>*Todos
+<form action="Projeto?action=enviarProjeto" method="post" name="cadastro"><small>*Todos
 os campos são obrigatórios</small><br>
   <br>
 Prontuário: <input disabled="disabled" maxlength="10" size="10" name="prontuario" value="${sessionScope.usuarioLogado.prontuario}"><br>
@@ -22,8 +22,6 @@ Prontuário: <input disabled="disabled" maxlength="10" size="10" name="prontuari
 Nome do aluno: <input disabled="disabled" maxlength="50" size="50" name="nome" value="${sessionScope.usuarioLogado.nome}"><br>
   <br>
 Semestre atual: <input maxlength="2" size="2" name="semestre" type="number"><br>
-  <br>
-Nome do orientador: <input disabled="disabled" maxlength="50" size="50" name="nomeorientador"><br>
   <br>
 Título do projeto: <input maxlength="100" size="70" name="titulo"><br>
   <br>
