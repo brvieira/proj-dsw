@@ -86,7 +86,7 @@ public class CadastrarUsuario extends HttpServlet {
     private void atualizarUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             UsuarioController uc = new UsuarioController();
-            Usuario u = new Usuario();
+            Usuario u = (Usuario) request.getSession().getAttribute("usuarioLogado");
             
             u.setCodigo(Integer.parseInt(request.getParameter("codigo")));
             u.setNome(request.getParameter("nome"));
