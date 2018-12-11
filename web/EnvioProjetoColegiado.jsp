@@ -14,7 +14,7 @@
     <h1 style="text-align: center;">Enviar Projeto ao Colegiado<br>
 </h1>
 
-<form action="Projeto?action=enviarProjeto" method="post" name="cadastro"><small>*Todos
+<form action="Projeto?action=criarProjeto" method="post" name="cadastro"><small>*Todos
 os campos são obrigatórios</small><br>
   <br>
 Prontuário: <input disabled="disabled" maxlength="10" size="10" name="prontuario" value="${sessionScope.usuarioLogado.prontuario}"><br>
