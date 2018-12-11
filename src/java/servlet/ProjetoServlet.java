@@ -152,7 +152,7 @@ public class ProjetoServlet extends HttpServlet {
             
             this.controller.cancelarEnvio(codigo);
             
-            rd = request.getRequestDispatcher("/dashboardAluno.jsp");
+            rd = request.getRequestDispatcher("/dashboardProfessor.jsp");
             rd.forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(Orientacao.class.getName()).log(Level.SEVERE, null, ex);
