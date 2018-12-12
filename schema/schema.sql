@@ -1,6 +1,7 @@
-  USE bd_alunos;
+  USE `bd_alunos`;
 
   DROP TABLE IF EXISTS `agendamentoBanca`;
+  DROP TABLE IF EXISTS `agendamentoDefesa`;
   DROP TABLE IF EXISTS `projeto`;
   DROP TABLE IF EXISTS `usuarioOrientador`;
   DROP TABLE IF EXISTS `usuario`;
@@ -34,6 +35,8 @@
     `projetoEnviadoColegiado` BOOLEAN DEFAULT FALSE,
     `projetoEnviadoColegiadoConcordado` BOOLEAN DEFAULT FALSE,
     `projetoRecebidoAnalise` BOOLEAN DEFAULT FALSE,
+    `projetoFinalEnviado` BOOLEAN DEFAULT FALSE,
+    `projetoFinalEnviadoOrientador` BOOLEAN DEFAULT FALSE,
     `usuarioID` INT(11) NOT NULL,
     FOREIGN KEY(`usuarioID`) REFERENCES usuario(codigo),
     PRIMARY KEY(`codigo`)
@@ -44,8 +47,8 @@
     `dataMarcada` DATE NOT NULL,
     `statusOrientando` BOOLEAN DEFAULT FALSE,
     `statusCoordenador` BOOLEAN DEFAULT FALSE,
-    `primeiroMembroID` INT(11) NOT NULL,
-    `segundoMembroID` INT(11) NOT NULL,
+    `primeiroMembroID` INT(11) NULL,
+    `segundoMembroID` INT(11) NULL,
     `projetoID` INT(11) NOT NULL,
     FOREIGN KEY(`projetoID`) REFERENCES projeto(codigo),
     FOREIGN KEY(`primeiroMembroID`) REFERENCES usuario(codigo),
@@ -53,6 +56,23 @@
     PRIMARY KEY(`codigo`)
   );
 
-INSERT INTO usuario VALUES(NULL, "42530524874", "Bruno", "a1620037", "1234", "bruno@gmail.com", true, true);
-INSERT INTO usuario VALUES(NULL, "42530523424", "Gustavo", "a1620033", "1234", "gustavo@gmail.com", true, false);
-INSERT INTO usuario VALUES(NULL, "42530524534", "Tiago", "a1620035", "1234", "bolacha@gmail.com", false, false);
+  CREATE TABLE `agendamentoDefesa` (
+    `codigo` INT(11) NOT NULL AUTO_INCREMENT,
+    `dataMarcada` DATE NOT NULL,
+    `statusAgendamentoOrientando` BOOLEAN DEFAULT FALSE,
+    `statusAgendamentoCoordenador` BOOLEAN DEFAULT FALSE,
+    `primeiroMembroID` INT(11) NULL,
+    `segundoMembroID` INT(11) NULL,
+    `resultadoDefesa` VARCHAR(50) NULL,
+    `parecerBanca` VARCHAR(50) NULL,
+    `consideracoesBanca` VARCHAR(255) NULL, 
+    `projetoID` INT(11) NOT NULL,
+    FOREIGN KEY(`projetoID`) REFERENCES projeto(codigo),
+    FOREIGN KEY(`primeiroMembroID`) REFERENCES usuario(codigo),
+    FOREIGN KEY(`segundoMembroID`) REFERENCES usuario(codigo),
+    PRIMARY KEY(`codigo`)
+  );
+
+INSERT INTO usuario VALUES(NULL, "42530524874", "Bruno", "1620037", "1234", "bruno@gmail.com", true, true);
+INSERT INTO usuario VALUES(NULL, "42530523424", "Gustavo", "1620304", "1234", "gustavo@gmail.com", true, false);
+INSERT INTO usuario VALUES(NULL, "42530524534", "Tiago", "1620035", "1234", "bolacha@gmail.com", false, false);

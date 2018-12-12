@@ -118,6 +118,35 @@ public class ProjetoDAO {
         }
     }
     
+    public Projeto obterProjeto(int codigo) throws Exception {
+        try {
+            PreparedStatement stm = con.prepareStatement("SELECT * FROM projeto WHERE codigo = ?");            
+            stm.setInt(1, codigo);
+            ResultSet rs = stm.executeQuery();
+            
+            if (rs.next())
+            {
+                Projeto prj = new Projeto();
+                UsuarioDAO userDAO = new UsuarioDAO();
+                
+                prj.setCodigo(rs.getInt("codigo"));
+                prj.setNome(rs.getString("nome"));  
+                prj.setParecerProjeto(rs.getString("parecerProjeto"));  
+                prj.setResultadoQualificacao(rs.getString("resultadoQualificacao"));  
+                prj.setProjetoEnviadoColegiado(rs.getBoolean("projetoEnviadoColegiado"));
+                prj.setProjetoEnviadoColegiadoConcordado(rs.getBoolean("projetoEnviadoColegiadoConcordado"));
+                prj.setProjetoRecebidoAnalise(rs.getBoolean("projetoRecebidoAnalise"));
+                prj.setAluno(userDAO.obterUsuario(rs.getInt("usuarioID")));
+                
+                return prj;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+        return null;
+    }
+    
     public ArrayList obterProjetos() throws Exception {
         try {
             ArrayList<Projeto> projetos = new ArrayList<>();
