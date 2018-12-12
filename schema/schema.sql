@@ -72,6 +72,9 @@
     FOREIGN KEY(`segundoMembroID`) REFERENCES usuario(codigo),
     PRIMARY KEY(`codigo`)
   );
+  
+ ALTER TABLE projeto ADD COLUMN versaoFinalEnviada boolean default false;
+ ALTER TABLE projeto ADD COLUMN versaoFinalConfirmadaOrientador boolean default false;
 
 INSERT INTO usuario VALUES(NULL, "42530524874", "Bruno", "1620037", "1234", "bruno@gmail.com", true, true);
 INSERT INTO usuario VALUES(NULL, "42530523424", "Gustavo", "1620304", "1234", "gustavo@gmail.com", true, false);
