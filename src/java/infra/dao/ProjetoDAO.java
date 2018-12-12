@@ -117,6 +117,32 @@ public class ProjetoDAO {
             throw ex;
         }
     }
+
+    public void confirmarVersaoFinal(int codigo) throws Exception {
+        try {
+            PreparedStatement stm = con.prepareStatement("UPDATE projeto SET versaoFinalConfirmadaOrientador = true WHERE codigo = ?");
+            
+            stm.setInt(1, codigo);
+            
+            stm.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+    }
+    
+    public void enviarVersaoFinal(int codigo) throws Exception {
+        try {
+            PreparedStatement stm = con.prepareStatement("UPDATE projeto SET versaoFinalEnviada = true WHERE codigo = ?");
+            
+            stm.setInt(1, codigo);
+            
+            stm.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+    }
     
     public Projeto obterProjeto(int codigo) throws Exception {
         try {
@@ -136,6 +162,8 @@ public class ProjetoDAO {
                 prj.setProjetoEnviadoColegiado(rs.getBoolean("projetoEnviadoColegiado"));
                 prj.setProjetoEnviadoColegiadoConcordado(rs.getBoolean("projetoEnviadoColegiadoConcordado"));
                 prj.setProjetoRecebidoAnalise(rs.getBoolean("projetoRecebidoAnalise"));
+                prj.setVersaoFinalEnviada(rs.getBoolean("versaoFinalEnviada"));
+                prj.setVersaoFinalConfirmadaOrientador(rs.getBoolean("versaoFinalConfirmadaOrientador"));
                 prj.setAluno(userDAO.obterUsuario(rs.getInt("usuarioID")));
                 
                 return prj;
@@ -146,7 +174,7 @@ public class ProjetoDAO {
         }
         return null;
     }
-    
+
     public ArrayList obterProjetos() throws Exception {
         try {
             ArrayList<Projeto> projetos = new ArrayList<>();
@@ -166,6 +194,40 @@ public class ProjetoDAO {
                 prj.setProjetoEnviadoColegiado(rs.getBoolean("projetoEnviadoColegiado"));
                 prj.setProjetoEnviadoColegiadoConcordado(rs.getBoolean("projetoEnviadoColegiadoConcordado"));
                 prj.setProjetoRecebidoAnalise(rs.getBoolean("projetoRecebidoAnalise"));
+                prj.setVersaoFinalEnviada(rs.getBoolean("versaoFinalEnviada"));
+                prj.setVersaoFinalConfirmadaOrientador(rs.getBoolean("versaoFinalConfirmadaOrientador"));
+                prj.setAluno(userDAO.obterUsuario(rs.getInt("usuarioID")));
+                projetos.add(prj);
+            }
+            
+            return projetos;
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+    }
+
+    public ArrayList obterProjetosFinalizados() throws Exception {
+        try {
+            ArrayList<Projeto> projetos = new ArrayList<>();
+            
+            PreparedStatement stm = con.prepareStatement("SELECT * FROM projeto where versaoFinalConfirmadaOrientador = TRUE");            
+            ResultSet rs = stm.executeQuery();
+            
+            while(rs.next())
+            {
+                Projeto prj = new Projeto();
+                UsuarioDAO userDAO = new UsuarioDAO();
+                
+                prj.setCodigo(rs.getInt("codigo"));
+                prj.setNome(rs.getString("nome"));  
+                prj.setParecerProjeto(rs.getString("parecerProjeto"));  
+                prj.setResultadoQualificacao(rs.getString("resultadoQualificacao"));  
+                prj.setProjetoEnviadoColegiado(rs.getBoolean("projetoEnviadoColegiado"));
+                prj.setProjetoEnviadoColegiadoConcordado(rs.getBoolean("projetoEnviadoColegiadoConcordado"));
+                prj.setProjetoRecebidoAnalise(rs.getBoolean("projetoRecebidoAnalise"));
+                prj.setVersaoFinalEnviada(rs.getBoolean("versaoFinalEnviada"));
+                prj.setVersaoFinalConfirmadaOrientador(rs.getBoolean("versaoFinalConfirmadaOrientador"));
                 prj.setAluno(userDAO.obterUsuario(rs.getInt("usuarioID")));
                 projetos.add(prj);
             }
@@ -196,6 +258,8 @@ public class ProjetoDAO {
                 prj.setProjetoEnviadoColegiado(rs.getBoolean("projetoEnviadoColegiado"));
                 prj.setProjetoEnviadoColegiadoConcordado(rs.getBoolean("projetoEnviadoColegiadoConcordado"));
                 prj.setProjetoRecebidoAnalise(rs.getBoolean("projetoRecebidoAnalise"));
+                prj.setVersaoFinalEnviada(rs.getBoolean("versaoFinalEnviada"));
+                prj.setVersaoFinalConfirmadaOrientador(rs.getBoolean("versaoFinalConfirmadaOrientador"));
                 prj.setAluno(userDAO.obterUsuario(rs.getInt("usuarioID")));
                 projetos.add(prj);
             }
@@ -227,6 +291,8 @@ public class ProjetoDAO {
                 prj.setProjetoEnviadoColegiado(rs.getBoolean("projetoEnviadoColegiado"));
                 prj.setProjetoEnviadoColegiadoConcordado(rs.getBoolean("projetoEnviadoColegiadoConcordado"));
                 prj.setProjetoRecebidoAnalise(rs.getBoolean("projetoRecebidoAnalise"));
+                prj.setVersaoFinalEnviada(rs.getBoolean("versaoFinalEnviada"));
+                prj.setVersaoFinalConfirmadaOrientador(rs.getBoolean("versaoFinalConfirmadaOrientador"));
                 prj.setAluno(userDAO.obterUsuario(rs.getInt("usuarioID")));
                 projetos.add(prj);
             }

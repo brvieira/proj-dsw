@@ -42,6 +42,12 @@ public class ProjetoServlet extends HttpServlet {
                 case "informarParecer":
                     this.informarParecer(request, response);
                     break;
+                case "enviarVersaoFinal":
+                    this.enviarVersaoFinal(request, response);
+                    break;
+                case "confirmarVersaoFinal":
+                    this.confirmarVersaoFinal(request, response);
+                    break;
                 default:
                     break;
             }
@@ -141,6 +147,34 @@ public class ProjetoServlet extends HttpServlet {
             int codigo = Integer.parseInt(request.getParameter("codigo"));
             
             this.controller.aprovarEnvio(codigo);
+            
+            rd = request.getRequestDispatcher("/dashboardProfessor.jsp");
+            rd.forward(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(Orientacao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void enviarVersaoFinal(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher rd;
+        try {
+            int codigo = Integer.parseInt(request.getParameter("codigo"));
+            
+            this.controller.enviarVersaoFinal(codigo);
+            
+            rd = request.getRequestDispatcher("/dashboardAluno.jsp");
+            rd.forward(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(Orientacao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void confirmarVersaoFinal(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher rd;
+        try {
+            int codigo = Integer.parseInt(request.getParameter("codigo"));
+            
+            this.controller.confirmarVersaoFinal(codigo);
             
             rd = request.getRequestDispatcher("/dashboardProfessor.jsp");
             rd.forward(request, response);

@@ -4,9 +4,9 @@ public class Projeto {
     private int codigo;
     private String nome, parecerProjeto, resultadoQualificacao;
     private Usuario aluno;
-    private boolean projetoEnviadoColegiado, projetoEnviadoColegiadoConcordado, projetoRecebidoAnalise;
+    private boolean projetoEnviadoColegiado, projetoEnviadoColegiadoConcordado, projetoRecebidoAnalise, versaoFinalEnviada, versaoFinalConfirmadaOrientador;
 
-    public Projeto(int codigo, String nome, String parecerProjeto, String resultadoQualificacao, Usuario aluno, boolean projetoEnviadoColegiado, boolean projetoEnviadoColegiadoConcordado, boolean projetoRecebidoAnalise) {
+    public Projeto(int codigo, String nome, String parecerProjeto, String resultadoQualificacao, Usuario aluno, boolean projetoEnviadoColegiado, boolean projetoEnviadoColegiadoConcordado, boolean projetoRecebidoAnalise, boolean versaoFinalEnviada, boolean versaoFinalConfirmadaOrientador) {
         this.codigo = codigo;
         this.nome = nome;
         this.parecerProjeto = parecerProjeto;
@@ -15,6 +15,8 @@ public class Projeto {
         this.projetoEnviadoColegiado = projetoEnviadoColegiado;
         this.projetoEnviadoColegiadoConcordado = projetoEnviadoColegiadoConcordado;
         this.projetoRecebidoAnalise = projetoRecebidoAnalise;
+        this.versaoFinalEnviada = versaoFinalEnviada;
+        this.versaoFinalConfirmadaOrientador = versaoFinalConfirmadaOrientador;
     }
     
     public Projeto() {}
@@ -82,4 +84,20 @@ public class Projeto {
     public void setProjetoRecebidoAnalise(boolean projetoRecebidoAnalise) {
         this.projetoRecebidoAnalise = projetoRecebidoAnalise;
     }   
+
+    public boolean isVersaoFinalEnviada() {
+        return versaoFinalEnviada;
+    }
+
+    public void setVersaoFinalEnviada(boolean versaoFinalEnviada) {
+        this.versaoFinalEnviada = versaoFinalEnviada;
+    }
+
+    public boolean isVersaoFinalConfirmadaOrientador() {
+        return versaoFinalConfirmadaOrientador;
+    }
+
+    public void setVersaoFinalConfirmadaOrientador(boolean versaoFinalConfirmadaOrientador) {
+        this.versaoFinalConfirmadaOrientador = versaoFinalConfirmadaOrientador;
+    }
 }

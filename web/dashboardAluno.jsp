@@ -147,6 +147,7 @@
                                 <th>Aprovado pelo Orientador ?</th>
                                 <th>Em Análise pelo Coordenador ?</th>
                                 <th>Parecer Projeto</th>
+                                <th>Projeto Final</th>
                             </thead>
                             <tbody>
                                 <c:forEach items="${prjController.obterProjetosByUsuarioID(sessionScope.usuarioLogado.codigo)}" var="p">
@@ -169,6 +170,27 @@
                                             <c:if test="${p.parecerProjeto != null}">
                                                 <a href="VisualizarParecer.jsp?codigo=${p.codigo}">Visualizar Parecer</a>
                                             </c:if>
+                                        </td>
+                                         <td>
+                                            <c:if test="${p.parecerProjeto == null}">
+                                                N/A
+                                            </c:if>
+                                            <c:if test="${p.parecerProjeto != null}">
+                                                <c:if test="${p.versaoFinalEnviada == false}">
+                                                    <a href="Projeto?action=enviarVersaoFinal&codigo=${p.codigo}">Enviar Versão Final</a>
+                                                </c:if>
+                                                 <c:if test="${p.versaoFinalEnviada == true}">
+                                                    
+                                                     <c:if test="${p.versaoFinalConfirmadaOrientador == false}">
+                                                        Aguardando Confirmação do Orientador
+                                                    </c:if>
+
+                                                     <c:if test="${p.versaoFinalConfirmadaOrientador == true}">
+                                                        Finalizado!
+                                                    </c:if>
+
+                                                </c:if>
+                                            </c:if>                                            
                                         </td>
                                     </tr>
                                 </c:forEach>

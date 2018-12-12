@@ -57,6 +57,7 @@
                                     <th>Aprovado pelo Orientador ?</th>
                                     <th>Em Análise pelo Coordenador ?</th>
                                     <th>Parecer Projeto</th>
+                                    <th>Versão Final</th>
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${prjController.obterProjetosByUsuarioID(p.aluno.codigo)}" var="a">
@@ -86,6 +87,19 @@
                                             </c:if>
                                             <c:if test="${a.parecerProjeto != null}">
                                                 <a href="VisualizarParecer.jsp?codigo=${a.codigo}">Visualizar Parecer</a>
+                                            </c:if>
+                                        </td>
+                                        <td>
+                                            <c:if test="${a.versaoFinalEnviada == false}">
+                                                Não Disponível
+                                            </c:if>
+                                            <c:if test="${a.versaoFinalEnviada == true}">
+                                                <c:if test="${a.versaoFinalConfirmadaOrientador == false}">
+                                                    <a href="Projeto?action=confirmarVersaoFinal&codigo=${a.codigo}">Confirmar Versão Final</a>
+                                                </c:if>
+                                                <c:if test="${a.versaoFinalConfirmadaOrientador == true}">
+                                                    Finalizado!
+                                                </c:if>
                                             </c:if>
                                         </td>
                                     </tr>

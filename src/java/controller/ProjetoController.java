@@ -32,9 +32,17 @@ public class ProjetoController {
     public void aprovarEnvio(int codigo) throws Exception { 
         dao.aprovarEnvio(codigo);
     }
+
+    public void confirmarVersaoFinal(int codigo) throws Exception { 
+        dao.confirmarVersaoFinal(codigo);
+    }
     
     public void confirmarRecebimento(int codigo) throws Exception { 
         dao.confirmarRecebimento(codigo);
+    }
+    
+    public void enviarVersaoFinal(int codigo) throws Exception { 
+        dao.enviarVersaoFinal(codigo);
     }
     
     public ArrayList<Projeto> obterProjetos() throws Exception  {
@@ -44,7 +52,11 @@ public class ProjetoController {
     public ArrayList<Projeto> obterProjetosPendentesColegiado() throws Exception  {
         return dao.obterProjetosPendentesColegiado();
     }
-    
+
+    public ArrayList<Projeto> obterProjetosFinalizados() throws Exception  {
+        return dao.obterProjetosFinalizados();
+    }
+
     public ArrayList<Projeto> obterProjetosByUsuarioID(int codigo) throws Exception {
         return dao.obterProjetosbyUsuarioID(codigo);
     }
