@@ -54,6 +54,7 @@
                                 <th>Aluno</th>
                                 <th>Título</th>
                                 <th>Projeto em análise pelo Colegiado ?</th>
+                                <th>Parecer</th>
                             </thead>
                             <tbody>
                                 <c:forEach items="${prjController.obterProjetosPendentesColegiado()}" var="p">
@@ -67,7 +68,16 @@
                                             <c:if test="${p.projetoRecebidoAnalise == true}">
                                                 ${p.projetoRecebidoAnalise}
                                             </c:if>
-                                            
+                                        </td>
+                                        <td>
+                                            <c:if test="${p.projetoRecebidoAnalise == true}">
+                                                <c:if test="${p.parecerProjeto == null}">
+                                                    <a href="InformarParecerProjeto.jsp?&codigo=${p.codigo}">Informar Parecer</a>
+                                                </c:if>
+                                                <c:if test="${p.parecerProjeto != null}">
+                                                    Parecer Enviado!
+                                                </c:if>
+                                            </c:if>
                                         </td>
                                     </tr>
                                 </c:forEach>

@@ -5,9 +5,7 @@
   
   <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
   <title>Enviar Projeto ao Colegiado</title>
-
-  
-  
+    <a href="InformarParecerProjeto.jsp"></a>
   <link rel="stylesheet" href="estilo.css" type="text/css">
 
 </head><body>

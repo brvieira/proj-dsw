@@ -146,6 +146,7 @@
                                 <th>Enviado ao Colegiado ?</th>
                                 <th>Aprovado pelo Orientador ?</th>
                                 <th>Em Análise pelo Coordenador ?</th>
+                                <th>Parecer Projeto</th>
                             </thead>
                             <tbody>
                                 <c:forEach items="${prjController.obterProjetosByUsuarioID(sessionScope.usuarioLogado.codigo)}" var="p">
@@ -161,6 +162,14 @@
                                         </td>
                                         <td>${p.projetoEnviadoColegiadoConcordado}</td>
                                         <td>${p.projetoRecebidoAnalise}</td>
+                                        <td>
+                                            <c:if test="${p.parecerProjeto == null}">
+                                                Não Disponível
+                                            </c:if>
+                                            <c:if test="${p.parecerProjeto != null}">
+                                                <a href="VisualizarParecer.jsp?codigo=${p.codigo}">Visualizar Parecer</a>
+                                            </c:if>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

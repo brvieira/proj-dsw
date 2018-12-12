@@ -46,6 +46,39 @@ public class ProjetoDAO {
         }
     }
     
+    public void informarParecer(int codigo, String textoParecer) throws Exception {
+        try {
+            PreparedStatement stm = con.prepareStatement("UPDATE projeto SET parecerProjeto = ? WHERE codigo = ?");
+            
+            stm.setString(1, textoParecer);
+            stm.setInt(2, codigo);
+            
+            stm.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+    }
+    
+    public String obterParecer(int codigo) throws Exception {
+        try {
+            Connection con = ConnectionFactory.obterConexao();
+            PreparedStatement stm = con.prepareStatement("SELECT * FROM projeto WHERE codigo = ?");            
+            stm.setInt(1, codigo);
+            ResultSet rs = stm.executeQuery();
+            
+            if (rs.next())
+            {
+                String parecer = rs.getString("parecerProjeto");
+                return parecer;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+        return null;        
+    }
+    
     public void cancelarEnvio(int codigo) throws Exception {
         try {
             PreparedStatement stm = con.prepareStatement("UPDATE projeto SET projetoEnviadoColegiado = false WHERE codigo = ?");

@@ -17,6 +17,14 @@ public class ProjetoController {
         dao.enviarProjeto(codigo);
     }
     
+    public void informarParecer(int codigo, String textoParecer) throws Exception { 
+        dao.informarParecer(codigo, textoParecer);
+    }
+    
+    public String obterParecer(int codigo) throws Exception { 
+        return dao.obterParecer(codigo);
+    }
+    
     public void cancelarEnvio(int codigo) throws Exception { 
         dao.cancelarEnvio(codigo);
     }

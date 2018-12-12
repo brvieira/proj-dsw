@@ -39,6 +39,9 @@ public class ProjetoServlet extends HttpServlet {
                 case "confirmarRecebimento":
                     this.confirmarRecebimento(request, response);
                     break;
+                case "informarParecer":
+                    this.informarParecer(request, response);
+                    break;
                 default:
                     break;
             }
@@ -111,6 +114,21 @@ public class ProjetoServlet extends HttpServlet {
             this.controller.enviarProjeto(codigo);
             
             rd = request.getRequestDispatcher("/dashboardAluno.jsp");
+            rd.forward(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(Orientacao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void informarParecer(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher rd;
+        try {
+            int codigo = Integer.parseInt(request.getParameter("codigo"));
+            String textoParecer = request.getParameter("textoParecer");
+            
+            this.controller.informarParecer(codigo, textoParecer);
+            
+            rd = request.getRequestDispatcher("/dashboardCoordenador.jsp");
             rd.forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(Orientacao.class.getName()).log(Level.SEVERE, null, ex);

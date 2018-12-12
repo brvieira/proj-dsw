@@ -56,6 +56,7 @@
                                     <th>Enviado ao Colegiado ?</th>
                                     <th>Aprovado pelo Orientador ?</th>
                                     <th>Em Análise pelo Coordenador ?</th>
+                                    <th>Parecer Projeto</th>
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${prjController.obterProjetosByUsuarioID(p.aluno.codigo)}" var="a">
@@ -79,6 +80,14 @@
                                             </c:if>
                                         </td>
                                         <td>${a.projetoRecebidoAnalise}</td>
+                                        <td>
+                                            <c:if test="${a.parecerProjeto == null}">
+                                                Não Disponível
+                                            </c:if>
+                                            <c:if test="${a.parecerProjeto != null}">
+                                                <a href="VisualizarParecer.jsp?codigo=${a.codigo}">Visualizar Parecer</a>
+                                            </c:if>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
