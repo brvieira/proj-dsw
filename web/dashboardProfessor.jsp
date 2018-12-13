@@ -57,6 +57,7 @@
                                     <th>Aprovado pelo Orientador ?</th>
                                     <th>Em Análise pelo Coordenador ?</th>
                                     <th>Parecer Projeto</th>
+                                    <th>Agendar Defesa</th>
                                     <th>Versão Final</th>
                                 </thead>
                                 <tbody>
@@ -87,6 +88,14 @@
                                             </c:if>
                                             <c:if test="${a.parecerProjeto != null}">
                                                 <a href="VisualizarParecer.jsp?codigo=${a.codigo}">Visualizar Parecer</a>
+                                            </c:if>
+                                        </td>
+                                        <td>
+                                            <c:if test="${a.parecerProjeto == null}">
+                                                N/A
+                                            </c:if>
+                                            <c:if test="${a.parecerProjeto != null}">
+                                                <a href="AgendarExameDefesa.jsp?codigo=${a.codigo}">Agendar Exame Defesa</a>
                                             </c:if>
                                         </td>
                                         <td>

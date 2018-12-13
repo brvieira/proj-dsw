@@ -6,13 +6,12 @@ public class Defesa {
     private int codigo;
     private Date dataMarcada;
     private boolean statusAgendamentoOrientando, statusAgendamentoCoordenador;
-    private Usuario primeiroMembro, segundoMembro;
-    private String resultadoDefesa, parecerBanca, consideracoesBanca;
+    private String resultadoDefesa, parecerBanca, consideracoesBanca, primeiroMembro, segundoMembro, horario;
     private Projeto projeto;
     
     public Defesa() {}
 
-    public Defesa(int codigo, Date dataMarcada, boolean statusAgendamentoOrientando, boolean statusAgendamentoCoordenador, Usuario primeiroMembro, Usuario segundoMembro, String resultadoDefesa, String parecerBanca, String consideracoesBanca, Projeto projeto) {
+    public Defesa(int codigo, Date dataMarcada, boolean statusAgendamentoOrientando, boolean statusAgendamentoCoordenador, String primeiroMembro, String segundoMembro, String resultadoDefesa, String parecerBanca, String consideracoesBanca, Projeto projeto, String horario) {
         this.codigo = codigo;
         this.dataMarcada = dataMarcada;
         this.statusAgendamentoOrientando = statusAgendamentoOrientando;
@@ -23,6 +22,7 @@ public class Defesa {
         this.parecerBanca = parecerBanca;
         this.consideracoesBanca = consideracoesBanca;
         this.projeto = projeto;
+        this.horario = horario;
     }
 
     public int getCodigo() {
@@ -57,22 +57,6 @@ public class Defesa {
         this.statusAgendamentoCoordenador = statusAgendamentoCoordenador;
     }
 
-    public Usuario getPrimeiroMembro() {
-        return primeiroMembro;
-    }
-
-    public void setPrimeiroMembro(Usuario primeiroMembro) {
-        this.primeiroMembro = primeiroMembro;
-    }
-
-    public Usuario getSegundoMembro() {
-        return segundoMembro;
-    }
-
-    public void setSegundoMembro(Usuario segundoMembro) {
-        this.segundoMembro = segundoMembro;
-    }
-
     public String getResultadoDefesa() {
         return resultadoDefesa;
     }
@@ -104,5 +88,28 @@ public class Defesa {
     public void setProjeto(Projeto projeto) {
         this.projeto = projeto;
     }
-    
+
+    public String getPrimeiroMembro() {
+        return primeiroMembro;
+    }
+
+    public void setPrimeiroMembro(String primeiroMembro) {
+        this.primeiroMembro = primeiroMembro;
+    }
+
+    public String getSegundoMembro() {
+        return segundoMembro;
+    }
+
+    public void setSegundoMembro(String segundoMembro) {
+        this.segundoMembro = segundoMembro;
+    }   
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
+    }    
 }

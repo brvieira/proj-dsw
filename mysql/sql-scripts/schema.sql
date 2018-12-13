@@ -48,14 +48,13 @@
   CREATE TABLE `agendamentoBanca` (
     `codigo` INT(11) NOT NULL AUTO_INCREMENT,
     `dataMarcada` DATE NOT NULL,
+    `horario` VARCHAR(255) NOT NULL,
     `statusOrientando` BOOLEAN DEFAULT FALSE,
     `statusCoordenador` BOOLEAN DEFAULT FALSE,
-    `primeiroMembroID` INT(11) NOT NULL,
-    `segundoMembroID` INT(11) NOT NULL,
+    `primeiroMembro` VARCHAR(255),
+    `segundoMembro` VARCHAR(255),
     `projetoID` INT(11) NOT NULL,
     FOREIGN KEY(`projetoID`) REFERENCES projeto(codigo),
-    FOREIGN KEY(`primeiroMembroID`) REFERENCES usuario(codigo),
-    FOREIGN KEY(`segundoMembroID`) REFERENCES usuario(codigo),
     PRIMARY KEY(`codigo`)
   );
 

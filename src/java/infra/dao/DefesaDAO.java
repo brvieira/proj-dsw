@@ -18,12 +18,15 @@ public class DefesaDAO {
     
     public void agendarDefesa(Defesa def) throws Exception {
         try {
-            PreparedStatement stm = con.prepareStatement("INSERT INTO agendamentoDefesa(dataMarcada, primeiroMembroID, segundoMembroID, projetoID) VALUES(?,?,?,?)");
+            PreparedStatement stm = con.prepareStatement("INSERT INTO agendamentoBanca(dataMarcada, primeiroMembro, segundoMembro, projetoID, horario) VALUES(?,?,?,?,?)");
             
-            stm.setDate(1,(Date) def.getDataMarcada());
-            stm.setInt(2, def.getPrimeiroMembro().getCodigo());
-            stm.setInt(3, def.getSegundoMembro().getCodigo());
+            stm.setDate(1, new java.sql.Date(def.getDataMarcada().getTime()));
+            stm.setString(2, def.getPrimeiroMembro());
+            stm.setString(3, def.getSegundoMembro());
             stm.setInt(4, def.getProjeto().getCodigo());
+            stm.setString(5, def.getHorario());
+            
+            stm.executeUpdate();
         } catch (Exception ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
@@ -34,7 +37,7 @@ public class DefesaDAO {
         try {
             String fieldToBeUpdated = isCoordenador ? "statusAgendamentoCoordenador" : "statusAgendamentoOrientando";
             
-            PreparedStatement stm = con.prepareStatement("UPDATE agendamentoDefesa SET "+fieldToBeUpdated+" = true WHERE codigo = ?");
+            PreparedStatement stm = con.prepareStatement("UPDATE agendamentoBanca SET "+fieldToBeUpdated+" = true WHERE codigo = ?");
             
             stm.setInt(1, codigo);
             
@@ -47,7 +50,7 @@ public class DefesaDAO {
     
     public void lancarResultado(int codigo, String resultadoDefesa, String parecerBanca, String consideracoesBanca) throws Exception {
         try {
-            PreparedStatement stm = con.prepareStatement("UPDATE agendamentoDefesa SET resultadoDefesa = ?, parecerBanca = ?, consideracoesBanca = ? WHERE codigo = ?");
+            PreparedStatement stm = con.prepareStatement("UPDATE agendamentoBanca SET resultadoDefesa = ?, parecerBanca = ?, consideracoesBanca = ? WHERE codigo = ?");
             
             stm.setString(1, resultadoDefesa);
             stm.setString(2, parecerBanca);
@@ -65,7 +68,7 @@ public class DefesaDAO {
         try {
             ArrayList<Defesa> defesas = new ArrayList<>();
             
-            PreparedStatement stm = con.prepareStatement("SELECT * FROM agendamentoDefesa");            
+            PreparedStatement stm = con.prepareStatement("SELECT * FROM agendamentoBanca");            
             ResultSet rs = stm.executeQuery();
             
             while(rs.next())
@@ -76,8 +79,8 @@ public class DefesaDAO {
                 
                 def.setCodigo(rs.getInt("codigo"));
                 def.setDataMarcada(rs.getDate("dataMarcada"));
-                def.setPrimeiroMembro(usrDAO.obterUsuario(rs.getInt("primeiroMembroID")));
-                def.setSegundoMembro(usrDAO.obterUsuario(rs.getInt("segundoMembroID")));
+                def.setPrimeiroMembro(rs.getString("primeiroMembro"));
+                def.setSegundoMembro(rs.getString("segundoMembro"));
                 def.setConsideracoesBanca(rs.getString("consideracoesBanca"));
                 def.setParecerBanca(rs.getString("parecerBanca"));
                 def.setResultadoDefesa(rs.getString("resultadoDefesa"));
